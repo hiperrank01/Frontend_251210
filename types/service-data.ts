@@ -9,5 +9,6 @@ export type SERVICE_TYPE = {
   icon: ReactNode;
   description: string;
   description2?: string;
+  description3?: string;
   text?: TextBlock[];
 }[];

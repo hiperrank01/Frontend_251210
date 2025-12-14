@@ -27,7 +27,7 @@ interface ProductInfo {
 //   rank: number;
 // }
 
-export const SeoAnalysis = () => {
+export const SeoAnalysis = ({ service }: { service: any }) => {
   // const baseUrl = process.env.NEXT_PUBLIC_API_URL;
   const [productInfo, setProductInfo] = useState<ProductInfo | null>(null);
   // const [mySlots, setMySlots] = useState<Slot[]>([]);
@@ -87,6 +87,20 @@ export const SeoAnalysis = () => {
 
   return (
     <div className="space-y-8">
+      <div className="flex flex-col items-left justify-center gap-8 py-1">
+        <p>
+          {service.text
+            ?.filter((item: any) => !!item?.content)
+            .map((item: any, index: number) => (
+              <p
+                key={index}
+                className="text-base font-medium text-gray-600 whitespace-pre-line [&_img]:w-3/4 [&_img]:h-auto [&_img]:object-contain [&_img]:mx-auto"
+              >
+                {item.content}
+              </p>
+            ))}
+        </p>
+      </div>
       <div className="flex space-x-2">
         <div className="w-full flex space-x-2">
           <Textarea

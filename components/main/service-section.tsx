@@ -29,11 +29,20 @@ export const ServiceSection = ({ setShowMembership }: ServiceSectionProps) => {
 
               <CardDescription>{service.description}</CardDescription>
               {service.description2 && (
-                <CardDescription>{service.description2}</CardDescription>
+                <CardDescription className="whitespace-pre-line">
+                  {service.description2}
+                </CardDescription>
+              )}
+              {service.description3 && (
+                <CardDescription className="whitespace-pre-line">
+                  {service.description3}
+                </CardDescription>
               )}
             </CardHeader>
             <CardContent>
-              {service.id === "seo-analysis" && <SeoAnalysis />}
+              {service.id === "seo-analysis" && (
+                <SeoAnalysis service={service} />
+              )}
               {service.id !== "seo-analysis" && (
                 <div className=" items-start justify-center gap-8 py-1">
                   {service.id !== "seo-analysis" && (
