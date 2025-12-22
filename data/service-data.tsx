@@ -4,10 +4,18 @@ import { SERVICE_TYPE } from "@/types/service-data";
 export const services: SERVICE_TYPE = [
   {
     id: "media-report",
-    title: "대시보드",
+    title: "자동화 보고서",
     icon: <BarChart3 className="w-6 h-6" />,
-    description:
-      "네이버, 구글, 메타, 틱톡, 카카오 등 매체별 광고 효율 비교 분석",
+    description2: `나인위닛 자동화 보고서를 사용해야 하는 이유
+
+1)캠페인/그룹/소재별 누수 조기 발견
+-광고 순위가 내려가게 되면 판매량이 떨어지게 되고 품질지수가 떨어져 나중에는 막대한 광고비로 순위를 올려야 합니다.
+-악순환이 되지 않게 조기에 잡아드립니다.
+
+2)황금키워드 관리
+-어떤 키워드가 매출이 증가되었는지 디테일하게 잡아드립니다.
+-누수가 되는 키워드는 조기에 차단을 해야합니다. 키워드 관리가 시작입니다.
+`,
     text: [{ content: <img src="/report/report_00.png" /> }],
   },
   {
