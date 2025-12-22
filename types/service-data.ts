@@ -1,14 +1,16 @@
 import type { ReactNode } from "react";
-export type TextBlock = {
-  content: ReactNode;
-  className?: string;
-};
-export type SERVICE_TYPE = {
+
+export interface ServiceTextItem {
+  content: string | ReactNode;
+}
+
+export interface Service {
   id: string;
   title: string;
   icon: ReactNode;
-  description: string;
+  description?: string;
   description2?: string;
   description3?: string;
-  text?: TextBlock[];
-}[];
+  text?: ServiceTextItem[];
+}
+export type SERVICE_TYPE = Service[];
