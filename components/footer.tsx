@@ -20,7 +20,7 @@ export const Footer = () => {
             <p>대표가 웹사이트를 만들 줄 압니다</p>
           </div>
           <div className="space-y-2 text-sm text-gray-400">
-            <p>주소:수원시 권선구 정조로 388번길 7-1 201호</p>
+            <p>주소:강서구 글로벌마케팅센터 a동 201호</p>
             <p>전화: 010-4590-4917</p>
             <p>이메일:9winit01@gmail.com</p>
             <p>사업자번호: 246-17-02470</p>

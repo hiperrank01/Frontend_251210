@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <style>
+    :root {
+      --primary-bg: #0a0a12;
+      --glass: rgba(255, 255, 255, 0.05);
+      --accent: #a29bfe;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Noto Sans KR', sans-serif;
+      background-color: var(--primary-bg);
+      color: white;
+      overflow-x: hidden;
+    }
+
+    /* 메타버스 분위기 배경 애니메이션 */
+    .bg-animation {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: radial-gradient(circle at 50% 50%, #1e1e3f 0%, #0a0a12 100%);
+      z-index: -1;
+    }
+
+    .section {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 50px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .zone-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 40px;
+      text-shadow: 0 0 15px var(--accent);
+      text-align: center;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+      width: 100%;
+      max-width: 1200px;
+    }
+
+    .card {
+      background: var(--glass);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 30px;
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: all 0.4s ease;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--accent);
+    }
+
+    .card h3 { color: var(--accent); margin-top: 0; }
+    .card p { line-height: 1.6; font-weight: 300; }
+
+    /* 2구역 소리 특화 스타일 */
+    .sound-wave {
+      display: inline-block;
+      width: 20px; height: 2px;
+      background: var(--accent);
+      margin-right: 5px;
+      box-shadow: 0 0 5px var(--accent);
+    }
+
+    #loading {
+      position: fixed; top:0; left:0; width:100%; height:100%;
+      background: var(--primary-bg);
+      display: flex; justify-content: center; align-items: center;
+      z-index: 1000; font-size: 1.5rem;
+    }
+
+    /* 감정 온도 조절 바 스타일 */
+    .temp-indicator {
+      width: 100%; height: 4px; background: #333; margin-top: 15px; border-radius: 2px;
+    }
+    .temp-fill { height: 100%; border-radius: 2px; transition: width 1s; }
+  </style>
+</head>
+<body>
+  <div id="loading">기억의 파편들을 불러오는 중...</div>
+  <div class="bg-animation"></div>
+
+  <div class="section">
+    <h1 class="animate__animated animate__fadeInDown" style="font-size: 3.5rem; letter-spacing: 10px;">GARDEN OF FRAGMENTS</h1>
+    <p class="animate__animated animate__fadeInUp">시간의 파편, 기억의 정원</p>
+    <p style="color: #888;">스크롤하여 학생들의 소중한 기억 속으로 들어오세요</p>
+  </div>
+
+  <div class="section" id="zone1">
+    <h2 class="zone-title">1구역: 페르소나의 숲</h2>
+    <div class="card-grid" id="grid1"></div>
+  </div>
+
+  <div class="section" id="zone2">
+    <h2 class="zone-title">2구역: 기억의 소리 복도</h2>
+    <div class="card-grid" id="grid2"></div>
+  </div>
+
+  <div class="section" id="zone3">
+    <h2 class="zone-title">3구역: 작은 보물의 방</h2>
+    <div class="card-grid" id="grid3"></div>
+  </div>
+
+  <div class="section" id="zone4">
+    <h2 class="zone-title">4구역: 인생의 메인 액자</h2>
+    <div class="card-grid" id="grid4"></div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      google.script.run.withSuccessHandler(renderExhibition).getExhibitionData();
+    });
+
+    function renderExhibition(data) {
+      document.getElementById('loading').style.display = 'none';
+      
+      const grids = {
+        1: document.getElementById('grid1'),
+        2: document.getElementById('grid2'),
+        3: document.getElementById('grid3'),
+        4: document.getElementById('grid4')
+      };
+
+      data.forEach(item => {
+        // 1구역 카드
+        if(item.nickname) {
+          grids[1].innerHTML += createCard(item.nickname, "이름의 특별한 의미를 만나보세요.");
+        }
+        // 2구역 카드
+        if(item.sound) {
+          grids[2].innerHTML += createCard("🎧 소리 기억", item.sound, "sound");
+        }
+        // 3구역 카드
+        if(item.treasure) {
+          grids[3].innerHTML += createCard("💎 소중한 물건", item.treasure);
+        }
+        // 4구역 카드
+        if(item.moment) {
+          grids[4].innerHTML += createCard("🖼️ 인생의 장면", `"${item.moment}"<br><br><small>과거의 나에게: ${item.letter}</small>`);
+        }
+      });
+    }
+
+    function createCard(title, content, type) {
+      let icon = type === 'sound' ? '<div class="sound-wave"></div>'.repeat(3) : '';
+      return `
+        <div class="card animate__animated animate__fadeIn">
+          <h3>${title}</h3>
+          <p>${content}</p>
+          ${icon}
+          <div class="temp-indicator">
+            <div class="temp-fill" style="width: ${Math.random()*100}%; background: ${getTempColor()}"></div>
+          </div>
+        </div>
+      `;
+    }
+
+    function getTempColor() {
+      const colors = ['#ff7675', '#74b9ff', '#55efc4', '#ffeaa7', '#a29bfe'];
+      return colors[Math.floor(Math.random() * colors.length)];
+    }
+  </script>
+</body>
+</html>

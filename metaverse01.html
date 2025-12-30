@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Memoria Metaverse</title>
+<style>
+body {
+  margin: 0;
+  font-family: 'Pretendard', sans-serif;
+  background: #0f0f0f;
+  color: white;
+}
+
+header {
+  padding: 40px;
+  text-align: center;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+  padding: 40px;
+}
+
+.room {
+  border-radius: 16px;
+  padding: 24px;
+  min-height: 260px;
+  background: linear-gradient(135deg, #222, #000);
+  box-shadow: 0 10px 30px rgba(0,0,0,.4);
+  transition: transform .3s;
+}
+
+.room:hover {
+  transform: scale(1.03);
+}
+
+.memory {
+  font-size: 16px;
+  margin-bottom: 12px;
+}
+
+.meta {
+  font-size: 13px;
+  opacity: .8;
+}
+
+.tag {
+  display: inline-block;
+  background: rgba(255,255,255,.15);
+  padding: 4px 10px;
+  border-radius: 12px;
+  margin-right: 6px;
+  margin-top: 6px;
+  font-size: 12px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>Memoria Metaverse</h1>
+  <p>우리의 기억이 공간이 되다</p>
+</header>
+
+<section class="gallery" id="gallery"></section>
+
+<script>
+google.script.run.withSuccessHandler(renderMemories).getMemories();
+
+function renderMemories(memories) {
+  const gallery = document.getElementById("gallery");
+  gallery.innerHTML = "";
+
+  memories.forEach(m => {
+    const room = document.createElement("div");
+    room.className = "room";
+    room.style.background = m.color 
+      ? `linear-gradient(135deg, ${m.color}, #000)`
+      : room.style.background;
+
+    room.innerHTML = `
+      <div class="memory">"${m.memory}"</div>
+      <div class="meta">🔊 ${m.sound || "소리 없음"}</div>
+      <div class="meta">🧸 ${m.object || "기억의 오브젝트"}</div>
+      <div>
+        <span class="tag">${m.emotion || "감정"}</span>
+      </div>
+    `;
+
+    gallery.appendChild(room);
+  });
+}
+</script>
+
+</body>
+</html>

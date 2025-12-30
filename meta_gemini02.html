@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #050508;
+      --accent: #7d5fff;
+      --glass: rgba(255, 255, 255, 0.08);
+    }
+    body {
+      margin: 0; font-family: 'Pretendard', sans-serif;
+      background: var(--bg); color: #fff; overflow-x: hidden;
+    }
+    
+    /* 기획안: 감각 지도 (Navigation) */
+    .nav-map {
+      position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+      display: flex; gap: 10px; z-index: 100;
+      background: var(--glass); backdrop-filter: blur(10px);
+      padding: 10px 20px; border-radius: 50px; border: 1px solid rgba(255,255,255,0.1);
+    }
+    .nav-btn {
+      background: none; border: none; color: #aaa; cursor: pointer; padding: 5px 15px;
+      transition: 0.3s; font-size: 0.9rem;
+    }
+    .nav-btn.active { color: var(--accent); font-weight: bold; }
+
+    /* 메인 전시 홀 */
+    .exhibition-hall {
+      padding-top: 100px; max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px;
+    }
+
+    /* 기억 카드 (Recall Rooms) */
+    .memory-card {
+      background: var(--glass); border-radius: 20px; padding: 30px;
+      border: 1px solid rgba(255,255,255,0.05); transition: 0.5s;
+      position: relative; overflow: hidden;
+    }
+    .memory-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      border-color: var(--accent); box-shadow: 0 10px 30px rgba(125, 95, 255, 0.2);
+    }
+    .tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; color: var(--accent); }
+    .title { font-size: 1.4rem; margin: 15px 0; font-weight: 700; }
+    .desc { font-size: 0.9rem; color: #ccc; line-height: 1.6; height: 80px; overflow: hidden; }
+
+    /* 감정 온도 표시기 */
+    .temp-bar {
+      height: 3px; width: 100%; background: #222; margin-top: 20px; border-radius: 5px;
+    }
+    .temp-fill { height: 100%; border-radius: 5px; transition: 1s; }
+
+    /* 인터랙티브 다이어리 존 */
+    .diary-zone {
+      margin: 100px auto; max-width: 600px; text-align: center;
+      background: var(--glass); padding: 40px; border-radius: 30px;
+    }
+    textarea {
+      width: 100%; background: rgba(0,0,0,0.3); border: 1px solid #444;
+      border-radius: 15px; color: #fff; padding: 15px; margin-bottom: 20px;
+    }
+    .save-btn {
+      background: var(--accent); color: #fff; border: none; padding: 10px 30px;
+      border-radius: 20px; cursor: pointer;
+    }
+
+    #loading { text-align: center; margin-top: 200px; font-size: 1.2rem; letter-spacing: 2px; }
+  </style>
+</head>
+<body>
+
+  <div class="nav-map">
+    <button class="nav-btn active" onclick="filterSense('all')">전체 지도</button>
+    <button class="nav-btn" onclick="filterSense('시각')">시각의 숲</button>
+    <button class="nav-btn" onclick="filterSense('청각')">소리의 방</button>
+    <button class="nav-btn" onclick="filterSense('촉각')">오브젝트 아카이브</button>
+  </div>
+
+  <div id="loading">기억의 주파수를 맞추는 중...</div>
+  
+  <main class="exhibition-hall" id="hall"></main>
+
+  <section class="diary-zone">
+    <h3>Avatar Diary Book</h3>
+    <p>이곳에 당신의 기억 한 조각을 남겨주세요.</p>
+    <textarea id="diaryInput" rows="4" placeholder="오늘 전시는 어떠셨나요?"></textarea>
+    <button class="save-btn" onclick="saveMyDiary()">기억 기록하기</button>
+  </section>
+
+  <script>
+    let allData = [];
+
+    window.onload = () => {
+      google.script.run.withSuccessHandler(data => {
+        allData = data;
+        renderCards(data);
+        document.getElementById('loading').style.display = 'none';
+      }).getMemoryData();
+    };
+
+    function renderCards(data) {
+      const hall = document.getElementById('hall');
+      hall.innerHTML = '';
+      data.forEach(item => {
+        const tempColor = item.temp > 3 ? '#ff5e57' : '#00d8d6'; // 따뜻함 vs 차가움
+        const card = document.createElement('div');
+        card.className = 'memory-card';
+        card.dataset.sense = item.type;
+        card.innerHTML = `
+          <div class="tag">${item.type} | ${item.nickname}</div>
+          <div class="title">${item.object || item.sound}</div>
+          <div class="desc">${item.description}</div>
+          <div style="font-size: 0.8rem; margin-top: 10px; color: ${item.color}">● ${item.color}</div>
+          <div class="temp-bar">
+            <div class="temp-fill" style="width: ${item.temp * 20}%; background: ${tempColor}"></div>
+          </div>
+        `;
+        // 클릭 시 소리 재생 (기획안의 Trigger Audio Zones)
+        card.onclick = () => alert(`🎧 소리 감각 재생: ${item.sound}`);
+        hall.appendChild(card);
+      });
+    }
+
+    function filterSense(sense) {
+      document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+      const filtered = sense === 'all' ? allData : allData.filter(d => d.type.includes(sense));
+      renderCards(filtered);
+    }
+
+    function saveMyDiary() {
+      const text = document.getElementById('diaryInput').value;
+      if(!text) return;
+      google.script.run.withSuccessHandler(msg => {
+        alert(msg);
+        document.getElementById('diaryInput').value = '';
+      }).saveDiary(text);
+    }
+  </script>
+</body>
+</html>
