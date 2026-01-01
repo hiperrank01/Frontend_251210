@@ -106,6 +106,13 @@ export const Creative = () => {
           width={1000}
           height={200}
         />
+                <Image
+          src="/단가표02.png"
+          alt="단가표02"
+          className="max-w-full h-auto"
+          width={1000}
+          height={200}
+        />
         
         <p>부가세 미포함</p>
         <p>※계좌이체 입금</p>
