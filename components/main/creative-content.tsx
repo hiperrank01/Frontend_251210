@@ -100,12 +100,13 @@ export const Creative = () => {
       ))}
       <div className="flex flex-col items-center justify-center mt-8">
         <Image
-          src="/단가표.png"
-          alt="단가표"
+          src="/단가표01.png"
+          alt="단가표01"
           className="max-w-full h-auto"
           width={1000}
           height={200}
         />
+        
         <p>부가세 미포함</p>
         <p>※계좌이체 입금</p>
         <p>※세금계산서 발행 가능합니다.</p>
