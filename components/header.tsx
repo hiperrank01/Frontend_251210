@@ -56,7 +56,7 @@ export const Header = () => {
       {isMobileView ? (
         <SheetClose asChild>
           <a
-            href="/down/나인위닛-회사소개서_251011(02).pdf" // public/sample.pdf
+            href="/down/나인위닛_회사소개서_260101.pdf" // public/sample.pdf
             download
             className={`hover:text-gray-300 transition-colors ${
               isMobileView ? "block w-full text-left py-2" : ""
@@ -67,7 +67,7 @@ export const Header = () => {
         </SheetClose>
       ) : (
         <a
-          href="/down/나인위닛-회사소개서_251011(02).pdf" // public/sample.pdf
+          href="/down/나인위닛_회사소개서_260101.pdf" // public/sample.pdf
           download
           className={`hover:text-gray-300 transition-colors ${
             isMobileView ? "block w-full text-left py-2" : ""
