@@ -17,7 +17,7 @@ export const Footer = () => {
             </div>
 
             <p>마케팅이 필요한 모든 비즈니스를 위한 서비스</p>
-            {/* <p>대표가 웹사이트를 만들 줄 압니다</p> */}
+            <p>네이버 광고 대행 무료</p>
             
           </div>
           <div className="space-y-2 text-sm text-gray-400">
