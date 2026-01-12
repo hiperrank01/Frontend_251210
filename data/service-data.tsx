@@ -97,10 +97,10 @@ export const services: SERVICE_TYPE = [
     ],
   },
   // {
-  //   id: "imc-marketing",
-  //   title: "IMC 마케팅 제안서 제공",
+  //   id: "imc마케팅",
+  //   title: "블로그 자동화",
   //   icon: <FileText className="w-6 h-6" />,
-  //   description: "웹사이트 URL 입력시 해당 기업에 대한 개요, 시장 분석, 매출액, IMC 전략 등의 방향 제시",
+  //   description: "캠페인별 노출수, 클릭수, 광고비, 매출액, ROAS 자동 리포팅",
   // },
 
   // {
