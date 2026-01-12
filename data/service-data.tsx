@@ -16,7 +16,17 @@ export const services: SERVICE_TYPE = [
 -어떤 키워드가 매출이 증가되었는지 디테일하게 잡아드립니다.
 -누수가 되는 키워드는 조기에 차단을 해야합니다. 키워드 관리가 시작입니다.
 `,
-    text: [{ content: <img src="/report/report_00.png" /> }],
+    text: [
+      { content: <img src="/report/report_00.png" /> },
+      { content: "01.캠페인별 리포트" },
+      { content: <img src="/report/naver_report_01.png" /> },
+      { content: "02.그룹별 리포트" },
+      { content: <img src="/report/naver_report_02.png" /> },
+      { content: "03.상품(소재)별 리포트" },
+      { content: <img src="/report/naver_report_03.png" /> },
+      { content: "04.키워드별 리포트" },
+      { content: <img src="/report/naver_report_04.png" /> }
+    ],
   },
   {
     id: "ga-analysis",
@@ -26,12 +36,12 @@ export const services: SERVICE_TYPE = [
     description2:
       "GA 연동시 전담 개발자가 필요하여 구글태그매니저 설치 등 구독이 필요합니다. \n 자사몰 매체별 유입 현황 트래킹리타게팅 광고 운영매체별 A,B 테스트 자동 보고서 제공",
     description3: `GA4 사용해야 하는 이유
-1)자사몰 상세페이지에 대한 
-2)광고 유입 채널 분석
-3)페이지별 체류 시간
-4)광고 소재에 따른 AB테스트
-5)보고서 제공
-6)유지 보수 비용`,
+1)유입 채널 분석
+2)퍼널별 이탈율, 전환율 분석
+3)고객 행동 흐름 분석
+4)고객 세그먼트 분석
+5)소재별 AB테스트 보고서 제공
+6)페이지별 체류 시간`,
     text: [
       { content: <img src="/ga/AB_TEST_REPORT.png" /> },
       { content: <img src="/ga/ga활용1.png" /> },
@@ -39,14 +49,9 @@ export const services: SERVICE_TYPE = [
       { content: <img src="/ga/ga활용3.png" /> },
       { content: <img src="/ga/ga활용4.png" /> },
 
-      {
-        content: "1. 구글애즈 ➡️  리마케팅 | 구글 태그매니저 | 검색어 리포트",
-      },
+      { content: "1. 구글애즈 ➡️  리마케팅 | 구글 태그매니저 | 검색어 리포트" },
       { content: "2. GA4 세팅 및 전환분석-전환 추적-utm 설치-태그 어시스턴트" },
-      {
-        content:
-          "3.CRM 마케팅 ➡️ 내부데이터 활용한 코호트, RFM, AARRR 퍼널 분석",
-      },
+      { content: "3.CRM 마케팅 ➡️ 내부데이터 활용한 코호트, RFM, AARRR 퍼널 분석"}
     ],
   },
   {
