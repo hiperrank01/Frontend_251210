@@ -27,7 +27,7 @@ export const services: SERVICE_TYPE = [
       { content: "04.키워드별 리포트" },
       { content: <img src="/report/naver_report_04.png" /> }
     ],
-  },
+  },                                                                                                                                                              MM
   {
     id: "ga-analysis",
     title: "GA 활용 고객 행동 분석",
@@ -54,8 +54,36 @@ export const services: SERVICE_TYPE = [
       { content: "GA4 연동시 utm, gtm 설치 등 전담 개발자가 필요합니다. \n 별도 문의 주시기 바랍니다." },
     ],
   },
+  // {
+  //   id: "seo-analysis",
+  //   title: "랭킹/예상 매출 분석",
+  //   icon: <Search className="w-6 h-6" />,
+  //   description:
+  //     "스마트스토어 URL 분석으로 자사/경쟁사 상품명, 순위, 예상매출 정보 제공",
+  //   text: [
+  //     {
+  //       content:
+  //         "품질지수의 중요함 아시나요?\n\n품질지수가 떨어지는 이유 \n1)판매량 2)랭킹 3)경쟁사 4)전환율 등등\n\n랭킹이 왜 떨어질까요? 판매자도 마케터도 대부분 모릅니다.\n\n어떤 이유로 순위가 떨어졌는지 모릅니다.\n광고 순위에 대한 디테일한 관리가 안되기 때문입니다.\n순위가 떨어지면 판매량이 떨어지고 품질지수가 떨어지고 일반영역 랭킹에도 영향이 갑니다.\n\n저희는 랭킹에 집중하였으며, 예상 판매량을 보고 빠르게 판단해야 합니다.",
+  //       },
+  //       { content: <img src="/report/ranking_01.png" /> },
+  //   ],
+  // },
   {
-    id: "seo-analysis",
+    id: "competitor",
+    title: "자사 경쟁사 분석",
+    icon: <TrendingUp className="w-6 h-6" />,
+    // description: "경쟁사 대비 우위 요소 분석 및 상품 개선 방안 도출",
+    text: [
+      { content:"N사 키워드별 상품 정보 제공" },
+      { content: "순위, 상품명, 판매가, 속성, 구매량, 리뷰 평점 등 정보 제공" },
+      // { content: "➡️AI 활용한 브랜드 스토리, 철학, 인지도, 마케팅 차별화 포인트 제공" },
+      // { content: <img src="/competitor_01.png" /> },
+      // { content: <img src="/competitor_02.png" /> },
+      { content: <img src="/competitor_03.png" /> },
+    ],
+  },
+    {
+    id: "ranking-analysis",
     title: "랭킹/예상 매출 분석",
     icon: <Search className="w-6 h-6" />,
     description:
@@ -68,25 +96,16 @@ export const services: SERVICE_TYPE = [
         { content: <img src="/report/ranking_01.png" /> },
     ],
   },
-  {
-    id: "competitor",
-    title: "자사 경쟁사 분석",
-    icon: <TrendingUp className="w-6 h-6" />,
-    // description: "경쟁사 대비 우위 요소 분석 및 상품 개선 방안 도출",
-    text: [
-      { content:"자사 프로그램 활용한 키워드별 판매량 높은 상품 정보 제공"
-
-       },
-      { content: "PRO 결제시 경쟁사 대비 우위 요소 분석 및 상품 개선 방안 제공" },
-      { content: "➡️AI 활용한 브랜드 스토리, 철학, 인지도, 마케팅 차별화 포인트 제공" },
-      { content: <img src="/competitor_01.png" /> },
-      { content: <img src="/competitor_02.png" /> },
-      { content: <img src="/competitor_03.png" /> },
-    ],
-  },
   // {
-  //   id: "report-auto",
-  //   title: "보고서 자동화",
+  //   id: "imc-marketing",
+  //   title: "IMC 마케팅 제안서 제공",
+  //   icon: <FileText className="w-6 h-6" />,
+  //   description: "웹사이트 URL 입력시 해당 기업에 대한 개요, 시장 분석, 매출액, IMC 전략 등의 방향 제시",
+  // },
+
+  // {
+  //   id: "blog-auto",
+  //   title: "블로그 자동화",
   //   icon: <FileText className="w-6 h-6" />,
   //   description: "캠페인별 노출수, 클릭수, 광고비, 매출액, ROAS 자동 리포팅",
   // },
