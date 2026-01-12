@@ -48,7 +48,7 @@ export const services: SERVICE_TYPE = [
       { content: "04.고객 행동 흐름 분석, 세그먼트 분석" },
       { content: <img src="/ga/ga활용4.png" /> },
       { content: "05.소재별 AB테스트 보고서 제공" },
-      { content: "06.페이지별 체류시간 제공" },
+      // { content: "06.페이지별 체류시간 제공" },
       { content: <img src="/ga/AB_TEST_REPORT.png" /> },
       { content: "CRM 마케팅 ➡️ 내부데이터 활용한 코호트, RFM, AARRR 퍼널 분석"},
       { content: "GA4 연동시 utm, gtm 설치 등 전담 개발자가 필요합니다. \n 별도 문의 주시기 바랍니다." },
@@ -71,10 +71,13 @@ export const services: SERVICE_TYPE = [
     id: "competitor",
     title: "자사 경쟁사 분석",
     icon: <TrendingUp className="w-6 h-6" />,
-    description: "경쟁사 대비 우위 요소 분석 및 상품 개선 방안 도출",
+    // description: "경쟁사 대비 우위 요소 분석 및 상품 개선 방안 도출",
     text: [
-      { content:"자사 프로그램 활용한 키워드별 판매량 높은 상품 추적" },
-      { content: "➡️브랜드 스토리, 철학, 인지도, 마케팅 차별화 포인트" },
+      { content:"자사 프로그램 활용한 키워드별 판매량 높은 상품 정보 제공"
+
+       },
+      { content: "PRO 결제시 경쟁사 대비 우위 요소 분석 및 상품 개선 방안 제공" },
+      { content: "➡️AI 활용한 브랜드 스토리, 철학, 인지도, 마케팅 차별화 포인트 제공" },
       { content: <img src="/competitor_01.png" /> },
       { content: <img src="/competitor_02.png" /> },
       { content: <img src="/competitor_03.png" /> },

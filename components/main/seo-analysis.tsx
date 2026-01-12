@@ -112,7 +112,7 @@ export const SeoAnalysis = ({ service }: { service: Service }) => {
       <div className="flex space-x-2">
         <div className="w-full flex space-x-2">
           <Textarea
-            placeholder="스마트스토어 URL을 입력하세요"
+            placeholder="스마트스토어 상품 URL을 입력하세요 ex:) https://smartstore.naver.com/xxx/products/11188312409"
             className="w-full "
             value={url}
             onChange={(e) => setUrl(e.target.value)}
