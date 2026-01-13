@@ -74,11 +74,9 @@ export const services: SERVICE_TYPE = [
     icon: <TrendingUp className="w-6 h-6" />,
     // description: "경쟁사 대비 우위 요소 분석 및 상품 개선 방안 도출",
     text: [
-      { content:"자사 프로그램 활용한 키워드별 판매량 높은 상품 정보 제공"
-
-       },
+      { content:"자사 프로그램 활용한 키워드별 상품 정보 제공"},
       { content: "PRO 결제시 경쟁사 대비 우위 요소 분석 및 상품 개선 방안 제공" },
-      { content: "➡️AI 활용한 브랜드 스토리, 철학, 인지도, 마케팅 차별화 포인트 제공" },
+      { content: "➡️순위, 상품명, 판매가, 스토어명, 구매수, 리뷰평점 제공" },
       { content: <img src="/competitor_00.png" /> },
       { content: <img src="/competitor_03.png" /> },
     ],
