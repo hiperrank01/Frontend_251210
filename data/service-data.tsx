@@ -94,7 +94,7 @@ export const services: SERVICE_TYPE = [
     description: "10년 이상 경력 전문가의 디자인 기획 제작 서비스",
     text: [],
   },
-];
+
 
   // {
   //   id: "auto-bid",
