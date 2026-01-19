@@ -27,7 +27,7 @@ export const services: SERVICE_TYPE = [
       { content: "04.키워드별 리포트" },
       { content: <img src="/report/naver_report_04.png" /> }
     ],
-  },                                                                                                                                                              MM
+  },                                                                                                                                                     
   {
     id: "ga-analysis",
     title: "GA 활용 고객 행동 분석",
@@ -191,7 +191,7 @@ export const services: SERVICE_TYPE = [
   // },
 
   {
-    id: "creative",
+    id: "video-creative",
     title: "이미지/영상 제작",
     icon: <ImageIcon className="w-6 h-6" />,
     description: "10년 이상 경력 전문가의 디자인 기획 제작 서비스",
