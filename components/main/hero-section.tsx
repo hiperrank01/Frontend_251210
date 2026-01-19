@@ -31,9 +31,9 @@ export default function HeroSection() {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
-          <p className="text-xl md:text-xl text-gray-600 mb-2 font-light">
+          {/* <p className="text-xl md:text-xl text-gray-600 mb-2 font-light">
             &quot;네이버/구글/메타 등 매체별 놓치고 있는 키워드는 없나?&quot;
-          </p>
+          </p> */}
         </div>
 
         <div
@@ -78,7 +78,7 @@ export default function HeroSection() {
             </div>
             <div className="group">
               <blockquote className="hover:-rotate-1 transition-transform duration-300 text-base md:text-base text-black font-medium bg-gray-50 px-4 py-3 rounded-lg shadow-sm hover:shadow-md hover:bg-gray-100 transition-all duration-300 italic">
-                &quot;대표가 웹사이트를 만들 줄 압니다.&quot;
+                &quot;네이버/구글/메타 등 매체별 놓치고 있는 키워드는 없나?&quot;
               </blockquote>
             </div>
           </div>
