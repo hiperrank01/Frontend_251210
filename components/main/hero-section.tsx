@@ -55,7 +55,7 @@ export default function HeroSection() {
             </div>
             <div className="group">
               <blockquote className="hover:-rotate-1 transition-transform duration-300 text-base md:text-base text-black font-medium bg-gray-50 px-4 py-3 rounded-lg shadow-sm hover:shadow-md hover:bg-gray-100 transition-all duration-300 italic">
-                &quot;상품 5개만 넘어가도 무엇을 어떻게 집중해야할지 모르는
+                &quot;상품 10개만 넘어가도 무엇을 어떻게 집중해야할지 모르는
                 대행사들, 어떻게 관리해야할까?&quot;
               </blockquote>
             </div>
