@@ -27,7 +27,7 @@ export const services: SERVICE_TYPE = [
       { content: "04.키워드별 리포트" },
       { content: <img src="/report/naver_report_04.png" /> }
     ],
-  },                                                                                                                                                              MM
+  },
   {
     id: "ga-analysis",
     title: "GA 활용 고객 행동 분석",
@@ -50,7 +50,7 @@ export const services: SERVICE_TYPE = [
       { content: "05.소재별 AB테스트 보고서 제공" },
       // { content: "06.페이지별 체류시간 제공" },
       { content: <img src="/ga/AB_TEST_REPORT.png" /> },
-      { content: "CRM 마케팅 ➡️ 내부데이터 활용한 코호트, RFM, AARRR 퍼널 분석"},
+      { content: "CRM 마케팅 ➡️ 내부데이터 활용한 코호트, RFM, AARRR 퍼널 분석" },
       { content: "GA4 연동시 utm, gtm 설치 등 전담 개발자가 필요합니다. \n 별도 문의 주시기 바랍니다." },
     ],
   },
@@ -64,8 +64,8 @@ export const services: SERVICE_TYPE = [
       {
         content:
           "품질지수의 중요함 아시나요?\n\n품질지수가 떨어지는 이유 \n1)판매량 2)랭킹 3)경쟁사 4)전환율 등등\n\n랭킹이 왜 떨어질까요? 판매자도 마케터도 대부분 모릅니다.\n\n어떤 이유로 순위가 떨어졌는지 모릅니다.\n광고 순위에 대한 디테일한 관리가 안되기 때문입니다.\n순위가 떨어지면 판매량이 떨어지고 품질지수가 떨어지고 일반영역 랭킹에도 영향이 갑니다.\n\n저희는 랭킹에 집중하였으며, 예상 판매량을 보고 빠르게 판단해야 합니다.",
-        },
-        { content: <img src="/report/ranking_01.png" /> },
+      },
+      { content: <img src="/report/ranking_01.png" /> },
     ],
   },
   {
@@ -74,7 +74,7 @@ export const services: SERVICE_TYPE = [
     icon: <TrendingUp className="w-6 h-6" />,
     // description: "경쟁사 대비 우위 요소 분석 및 상품 개선 방안 도출",
     text: [
-      { content:"자사 프로그램 활용한 키워드별 상품 정보 제공"},
+      { content: "자사 프로그램 활용한 키워드별 상품 정보 제공" },
       { content: "PRO 결제시 경쟁사 대비 우위 요소 분석 및 상품 개선 방안 제공" },
       { content: "➡️순위, 상품명, 판매가, 스토어명, 구매수, 리뷰평점 제공" },
       { content: <img src="/competitor_00.png" /> },
