@@ -31,8 +31,8 @@ export const Footer = () => {
         </div>
         <div className="border-t border-gray-800 mt-8 pt-8 flex flex-col items-center text-gray-400">
           <div className="flex space-x-6 mb-4 text-xs">
-            <Link href="/terms-of-service" className="hover:text-white transition-colors">이용약관</Link>
-            <Link href="/privacy-policy" className="hover:text-white transition-colors">개인정보 처리방침</Link>
+            <Link href="/legal/terms-of-service" className="hover:text-white transition-colors">이용약관</Link>
+            <Link href="/legal/privacy-policy" className="hover:text-white transition-colors">개인정보 처리방침</Link>
           </div>
           <p className="text-sm">&copy; 2025 나인위닛. All rights reserved.</p>
         </div>
