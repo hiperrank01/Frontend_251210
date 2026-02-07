@@ -95,6 +95,22 @@ const ScrollableRow: React.FC<ScrollableRowProps> = ({ category }) => {
 export const Creative = () => {
   return (
     <div className="w-full mt-8 space-y-8">
+      {/* Video Maker iframe */}
+      <div className="w-full rounded-lg overflow-hidden shadow-lg border border-gray-200">
+        <div className="bg-gradient-to-r from-purple-600 to-blue-600 px-4 py-3">
+          <h3 className="text-lg font-semibold text-white">🎬 AI 영상 제작</h3>
+          <p className="text-sm text-white/80">URL만 입력하면 자동으로 YouTube Shorts를 생성합니다</p>
+        </div>
+        <iframe
+          src="https://video-maker.ninewinit.store/"
+          className="w-full border-0"
+          style={{ height: "700px" }}
+          title="AI Video Maker"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        />
+      </div>
+
       {youtubeCategories.map((category, index) => (
         <ScrollableRow key={index} category={category} />
       ))}
@@ -106,14 +122,14 @@ export const Creative = () => {
           width={1000}
           height={200}
         />
-                <Image
+        <Image
           src="/단가표02.png"
           alt="단가표02"
           className="max-w-full h-auto"
           width={1000}
           height={200}
         />
-        
+
         <p>부가세 미포함</p>
         <p>※계좌이체 입금</p>
         <p>※세금계산서 발행 가능합니다.</p>
