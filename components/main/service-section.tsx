@@ -11,6 +11,8 @@ import { Button } from "@/components/ui/button";
 import { SeoAnalysis } from "./seo-analysis";
 import { services } from "@/data/service-data";
 import { Creative } from "./creative-content";
+import { BlogAutomation } from "./blog-automation-content";
+
 interface ServiceSectionProps {
   setShowMembership: (show: boolean) => void;
 }
@@ -60,6 +62,7 @@ export const ServiceSection = ({ setShowMembership }: ServiceSectionProps) => {
                     </div>
                   )}
                   {service.id === "creative" && <Creative />}
+                  {service.id === "blog-automation" && <BlogAutomation />}
 
                   <br />
 
