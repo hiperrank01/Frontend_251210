@@ -1,4 +1,4 @@
-import { Search, TrendingUp, BarChart3, Users, ImageIcon } from "lucide-react";
+import { Search, TrendingUp, BarChart3, Users, ImageIcon, Pencil } from "lucide-react";
 import { SERVICE_TYPE } from "@/types/service-data";
 
 
@@ -94,20 +94,12 @@ export const services: SERVICE_TYPE = [
     description: "10년 이상 경력 전문가의 디자인 기획 제작 서비스",
     text: [],
   },
-
-
-  // {
-  //   id: "auto-bid",
-  //   title: "자동입찰",
-  //   icon: <Target className="w-6 h-6" />,
-  //   description: "목표 순위 기반 키워드 자동입찰 시스템",
-  // },
-
-  // {
-  //   id: "video-creative",
-  //   title: "이미지/영상 제작",
-  //   icon: <ImageIcon className="w-6 h-6" />,
-  //   description: "10년 이상 경력 전문가의 디자인 기획 제작 서비스",
-  //   text: [],
-  // },
+  {
+    id: "blog-automation",
+    title: "블로그 글쓰기 자동화",
+    icon: <Pencil className="w-6 h-6" />,
+    description: "AI 기반 네이버 블로그 자동 포스팅 시스템",
+    text: [],
+  },
 ];
+
