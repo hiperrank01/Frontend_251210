@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meta 광고 리포트</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        h1,
+        h2 {
+            color: #1a1a2e;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 1.3rem;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            margin-top: 15px;
+        }
+
+        thead {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        th {
+            color: white;
+            font-weight: 500;
+            padding: 14px 10px;
+            text-align: right;
+        }
+
+        th:first-child {
+            text-align: center;
+            border-radius: 8px 0 0 0;
+        }
+
+        th:last-child {
+            border-radius: 0 8px 0 0;
+        }
+
+        td {
+            padding: 12px 10px;
+            text-align: right;
+            border-bottom: 1px solid #e8e8e8;
+            color: #4a5568;
+        }
+
+        td:first-child {
+            text-align: center;
+            font-weight: 500;
+            color: #2d3748;
+        }
+
+        .total-row {
+            background: #f0f4ff;
+            font-weight: 700;
+        }
+
+        .total-row td {
+            color: #1a1a2e;
+        }
+
+        .change-row {
+            background: #fffbeb;
+        }
+
+        .change-row td {
+            font-weight: 600;
+        }
+
+        .positive {
+            color: #38a169;
+        }
+
+        .negative {
+            color: #e53e3e;
+        }
+
+        .chart-container {
+            height: 350px;
+            margin-top: 20px;
+        }
+
+        .fluctuation-section {
+            margin-top: 20px;
+        }
+
+        .fluctuation-category {
+            margin-bottom: 20px;
+        }
+
+        .category-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .category-title.increase {
+            color: #38a169;
+        }
+
+        .category-title.decrease {
+            color: #e53e3e;
+        }
+
+        .fluctuation-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .fluctuation-item {
+            padding: 15px 20px;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            font-size: 13.5px;
+            border-left: 4px solid;
+            color: #4a5568;
+            line-height: 1.6;
+        }
+
+        .fluctuation-item.increase {
+            border-color: #f56565;
+            /* 빨간색 (증가 시 이미지 참고) */
+        }
+
+        .fluctuation-item.decrease {
+            border-color: #48bb78;
+            /* 초록색 (감소 시 이미지 참고) */
+        }
+
+        .fluctuation-item.stable {
+            border-color: #cbd5e0;
+            /* 회색 (변동 없음) */
+        }
+
+        .item-label {
+            font-weight: 500;
+        }
+
+        .positive {
+            color: #f56565;
+            font-weight: 600;
+        }
+
+        .negative {
+            color: #48bb78;
+            font-weight: 600;
+        }
+
+        .no-data {
+            text-align: center;
+            padding: 20px;
+            color: #718096;
+            font-style: italic;
+        }
+
+        .refresh-btn {
+            display: block;
+            margin: 20px auto 0;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .refresh-btn:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1 style="color: white; margin-bottom: 30px;">Meta 광고 리포트 <span style="font-size: 0.5em; opacity: 0.7;">(v2.0 -
+                Style Refined)</span></h1>
+
+        <!-- 매체별 광고요약 -->
+        <div class="card">
+            <h2>매체별 광고요약</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>매체</th>
+                        <th>노출</th>
+                        <th>클릭</th>
+                        <th>비용</th>
+                        <th>전환</th>
+                        <th>전환매출</th>
+                        <th>평균CPC</th>
+                        <th>평균ROAS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Meta</td>
+                        <td>{{ "{:,}".format(data.total.impressions) }}</td>
+                        <td>{{ "{:,}".format(data.total.clicks) }}</td>
+                        <td>{{ "{:,}".format(data.total.spend) }}</td>
+                        <td>{{ "{:,}".format(data.total.conversions) }}</td>
+                        <td>{{ "{:,}".format(data.total.conversion_value) }}</td>
+                        <td>{{ "{:,}".format(data.total.cpc) }}</td>
+                        <td class="{{ 'positive' if data.total.roas >= 100 else 'negative' }}">{{
+                            "%.2f"|format(data.total.roas) }}%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 전달대비 광고요약 -->
+        <div class="card">
+            <h2>전달대비 광고요약</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>구분</th>
+                        <th>노출</th>
+                        <th>클릭</th>
+                        <th>비용</th>
+                        <th>전환</th>
+                        <th>전환매출</th>
+                        <th>평균CPC</th>
+                        <th>평균ROAS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if data.mom.current %}
+                    <tr>
+                        <td>이번달</td>
+                        <td>{{ "{:,}".format(data.mom.current.impressions) }}</td>
+                        <td>{{ "{:,}".format(data.mom.current.clicks) }}</td>
+                        <td>{{ "{:,}".format(data.mom.current.spend) }}</td>
+                        <td>{{ "{:,}".format(data.mom.current.conversions) }}</td>
+                        <td>{{ "{:,}".format(data.mom.current.conversion_value) }}</td>
+                        <td>{{ "{:,}".format(data.mom.current.cpc) }}</td>
+                        <td>{{ "%.2f"|format(data.mom.current.roas) }}%</td>
+                    </tr>
+                    <tr>
+                        <td>지난달</td>
+                        <td>{{ "{:,}".format(data.mom.previous.impressions) }}</td>
+                        <td>{{ "{:,}".format(data.mom.previous.clicks) }}</td>
+                        <td>{{ "{:,}".format(data.mom.previous.spend) }}</td>
+                        <td>{{ "{:,}".format(data.mom.previous.conversions) }}</td>
+                        <td>{{ "{:,}".format(data.mom.previous.conversion_value) }}</td>
+                        <td>{{ "{:,}".format(data.mom.previous.cpc) }}</td>
+                        <td>{{ "%.2f"|format(data.mom.previous.roas) }}%</td>
+                    </tr>
+                    <tr class="change-row">
+                        <td>증감</td>
+                        <td class="{{ 'positive' if data.mom.change.impressions >= 0 else 'negative' }}">{{
+                            "{:,}".format(data.mom.change.impressions) }}</td>
+                        <td class="{{ 'positive' if data.mom.change.clicks >= 0 else 'negative' }}">{{
+                            "{:,}".format(data.mom.change.clicks) }}</td>
+                        <td class="{{ 'negative' if data.mom.change.spend > 0 else 'positive' }}">{{
+                            "{:,}".format(data.mom.change.spend) }}</td>
+                        <td class="{{ 'positive' if data.mom.change.conversions >= 0 else 'negative' }}">{{
+                            "{:,}".format(data.mom.change.conversions) }}</td>
+                        <td class="{{ 'positive' if data.mom.change.conversion_value >= 0 else 'negative' }}">{{
+                            "{:,}".format(data.mom.change.conversion_value) }}</td>
+                        <td class="{{ 'negative' if data.mom.change.cpc > 0 else 'positive' }}">{{
+                            "{:,}".format(data.mom.change.cpc) }}</td>
+                        <td class="{{ 'positive' if data.mom.change.roas >= 0 else 'negative' }}">{{
+                            "%.2f"|format(data.mom.change.roas) }}%</td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="8" class="no-data">데이터가 없습니다.</td>
+                    </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 차트 -->
+        <div class="card">
+            <h2>차트</h2>
+            <h3 style="text-align: center; color: #4a5568; margin-top: 15px;">월별 광고 성과 추이</h3>
+            <p style="text-align: center; color: #a0aec0; font-size: 12px;">ROAS, 광고비, 전환매출 (월별)</p>
+            <div class="chart-container">
+                <canvas id="performanceChart"></canvas>
+            </div>
+        </div>
+
+        <!-- 월별 요약 -->
+        <div class="card">
+            <h2>월별 광고 요약</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>기간</th>
+                        <th>노출</th>
+                        <th>클릭</th>
+                        <th>비용</th>
+                        <th>전환</th>
+                        <th>전환매출</th>
+                        <th>평균CPC</th>
+                        <th>평균ROAS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="total-row">
+                        <td>{{ data.total.period }}</td>
+                        <td>{{ "{:,}".format(data.total.impressions) }}</td>
+                        <td>{{ "{:,}".format(data.total.clicks) }}</td>
+                        <td>{{ "{:,}".format(data.total.spend) }}</td>
+                        <td>{{ "{:,}".format(data.total.conversions) }}</td>
+                        <td>{{ "{:,}".format(data.total.conversion_value) }}</td>
+                        <td>{{ "{:,}".format(data.total.cpc) }}</td>
+                        <td class="{{ 'positive' if data.total.roas >= 100 else 'negative' }}">{{
+                            "%.2f"|format(data.total.roas) }}%</td>
+                    </tr>
+                    {% for row in data.monthly %}
+                    <tr>
+                        <td>{{ row.period }}</td>
+                        <td>{{ "{:,}".format(row.impressions) }}</td>
+                        <td>{{ "{:,}".format(row.clicks) }}</td>
+                        <td>{{ "{:,}".format(row.spend) }}</td>
+                        <td>{{ "{:,}".format(row.conversions) }}</td>
+                        <td>{{ "{:,}".format(row.conversion_value) }}</td>
+                        <td>{{ "{:,}".format(row.cpc) }}</td>
+                        <td class="{{ 'positive' if row.roas >= 100 else 'negative' }}">{{ "%.2f"|format(row.roas) }}%
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="8" class="no-data">월별 데이터가 없습니다.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 캠페인 등락 요약 -->
+        <div class="card">
+            <h2>월간 캠페인 전환매출 등락 요약</h2>
+            <div class="fluctuation-section">
+                <div class="fluctuation-category">
+                    <div class="category-title increase">✅ 증가</div>
+                    <ul class="fluctuation-list">
+                        {% for item in campaign_fluctuation.increases %}
+                        <li class="fluctuation-item increase">
+                            <span class="item-label">캠페인 '{{ item.name }}'</span> <span
+                                style="color: #cbd5e0; font-size: 12px;">(id:{{ item.id }})</span> -
+                            전월: ₩{{ "{:,}".format(item.previous) }}, 이번달: ₩{{ "{:,}".format(item.current) }},
+                            중감: <span class="positive">₩{{ "{:,}".format(item.change) }} (+{{ item.percentage
+                                }}%)</span>
+                        </li>
+                        {% else %}
+                        <li class="no-data">증가한 캠페인이 없습니다.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="fluctuation-category">
+                    <div class="category-title decrease">❌ 감소</div>
+                    <ul class="fluctuation-list">
+                        {% for item in campaign_fluctuation.decreases %}
+                        <li class="fluctuation-item decrease">
+                            <span class="item-label">캠페인 '{{ item.name }}'</span> <span
+                                style="color: #cbd5e0; font-size: 12px;">(id:{{ item.id }})</span> -
+                            전월: ₩{{ "{:,}".format(item.previous) }}, 이번달: ₩{{ "{:,}".format(item.current) }},
+                            중감: <span class="negative">₩{{ "{:,}".format(item.change) }} ({{ item.percentage }}%)</span>
+                        </li>
+                        {% else %}
+                        <li class="no-data">감소한 캠페인이 없습니다.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="fluctuation-category">
+                    <div class="category-title" style="color: #718096;">⚪ 변동 없음 / 신규</div>
+                    <ul class="fluctuation-list">
+                        {% for item in campaign_fluctuation.stables %}
+                        <li class="fluctuation-item stable">
+                            <span class="item-label">캠페인 '{{ item.name }}'</span> <span
+                                style="color: #cbd5e0; font-size: 12px;">(id:{{ item.id }})</span> -
+                            전월: ₩{{ "{:,}".format(item.previous) }}, 이번달: ₩{{ "{:,}".format(item.current) }},
+                            결과: <span style="color: #718096; font-weight: 600;">₩{{ "{:,}".format(item.change) }} ({{
+                                item.percentage }}%)</span>
+                        </li>
+                        {% else %}
+                        <li class="no-data">해당하는 캠페인이 없습니다.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 광고그룹 등락 요약 -->
+        <div class="card">
+            <h2>월간 광고그룹 전환매출 등락 요약</h2>
+            <div class="fluctuation-section">
+                <div class="fluctuation-category">
+                    <div class="category-title increase">✅ 증가</div>
+                    <ul class="fluctuation-list">
+                        {% for item in adset_fluctuation.increases %}
+                        <li class="fluctuation-item increase">
+                            <span class="item-label">광고그룹 '{{ item.name }}'</span> <span
+                                style="color: #cbd5e0; font-size: 12px;">(id:{{ item.id }})</span> -
+                            전월: ₩{{ "{:,}".format(item.previous) }}, 이번달: ₩{{ "{:,}".format(item.current) }},
+                            중감: <span class="positive">₩{{ "{:,}".format(item.change) }} (+{{ item.percentage
+                                }}%)</span>
+                        </li>
+                        {% else %}
+                        <li class="no-data">증가한 광고그룹이 없습니다.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="fluctuation-category">
+                    <div class="category-title decrease">❌ 감소</div>
+                    <ul class="fluctuation-list">
+                        {% for item in adset_fluctuation.decreases %}
+                        <li class="fluctuation-item decrease">
+                            <span class="item-label">광고그룹 '{{ item.name }}'</span> <span
+                                style="color: #cbd5e0; font-size: 12px;">(id:{{ item.id }})</span> -
+                            전월: ₩{{ "{:,}".format(item.previous) }}, 이번달: ₩{{ "{:,}".format(item.current) }},
+                            중감: <span class="negative">₩{{ "{:,}".format(item.change) }} ({{ item.percentage }}%)</span>
+                        </li>
+                        {% else %}
+                        <li class="no-data">감소한 광고그룹이 없습니다.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="fluctuation-category">
+                    <div class="category-title" style="color: #718096;">⚪ 변동 없음 / 신규</div>
+                    <ul class="fluctuation-list">
+                        {% for item in adset_fluctuation.stables %}
+                        <li class="fluctuation-item stable">
+                            <span class="item-label">광고그룹 '{{ item.name }}'</span> <span
+                                style="color: #cbd5e0; font-size: 12px;">(id:{{ item.id }})</span> -
+                            전월: ₩{{ "{:,}".format(item.previous) }}, 이번달: ₩{{ "{:,}".format(item.current) }},
+                            결과: <span style="color: #718096; font-weight: 600;">₩{{ "{:,}".format(item.change) }} ({{
+                                item.percentage }}%)</span>
+                        </li>
+                        {% else %}
+                        <li class="no-data">해당하는 광고그룹이 없습니다.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <button class="refresh-btn" onclick="location.reload()">🔄 새로고침</button>
+    </div>
+
+    <script>
+        const ctx = document.getElementById('performanceChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar', // Base type is bar for ROAS
+            data: {
+                labels: {{ chart_data.labels | tojson }},
+            datasets: [
+            {
+                label: 'ROAS (%)',
+                data: {{ chart_data.roas | tojson }},
+            backgroundColor: '#2ecc71', // Emerald green bars
+            borderColor: '#27ae60',
+            borderWidth: 1,
+            yAxisID: 'y1',
+            order: 2
+                    },
+            {
+                label: '전환매출',
+                data: {{ chart_data.conversion_value | tojson }},
+            type: 'line',
+            borderColor: '#f39c12', // Orange line
+            backgroundColor: '#f39c12',
+            borderWidth: 3,
+            pointRadius: 4,
+            borderDash: [5, 5], // Dotted line
+            fill: false,
+            tension: 0.1,
+            yAxisID: 'y',
+            order: 0
+                    },
+            {
+                label: '광고비',
+                data: {{ chart_data.spend | tojson }},
+            type: 'line',
+            borderColor: '#8e44ad', // Purple line
+            backgroundColor: '#8e44ad',
+            borderWidth: 3,
+            pointRadius: 4,
+            borderDash: [5, 5], // Dotted line
+            fill: false,
+            tension: 0.1,
+            yAxisID: 'y',
+            order: 1
+                    }
+        ]
+            },
+            options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: {
+                mode: 'index',
+                intersect: false
+            },
+            scales: {
+                y: {
+                    type: 'linear',
+                    display: true,
+                    position: 'left',
+                    beginAtZero: true,
+                    title: { display: true, text: '금액 (원)' },
+                    ticks: {
+                        callback: function (value) { return value.toLocaleString('ko-KR'); }
+                    }
+                },
+                y1: {
+                    type: 'linear',
+                    display: true,
+                    position: 'right',
+                    beginAtZero: true,
+                    title: { display: true, text: 'ROAS (%)' },
+                    grid: { drawOnChartArea: false },
+                    ticks: {
+                        callback: function (value) { return value + '%'; }
+                    }
+                },
+                x: {
+                    title: { display: true, text: '기간 (월)' },
+                    ticks: {
+                        maxRotation: 45,
+                        minRotation: 45
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        usePointStyle: true,
+                        boxWidth: 10
+                    }
+                }
+            }
+        }
+        });
+    </script>
+</body>
+
+</html>
