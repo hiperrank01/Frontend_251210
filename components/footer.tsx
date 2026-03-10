@@ -22,7 +22,7 @@ export const Footer = () => {
 
           </div>
           <div className="space-y-2 text-sm text-gray-400">
-            <p>주소:서울 강서구 공항대로61길 29 글로벌마케팅센터 a동 201호</p>
+            <p>주소: 서울특별시 강서구 등촌동 648-5 아임2030 201호</p>
             <p>전화: 010-4590-4917</p>
             <p>이메일:9winit01@gmail.com</p>
             <p>사업자번호: 246-17-02470</p>
