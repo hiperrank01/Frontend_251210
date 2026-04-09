@@ -2,6 +2,15 @@ import { Video, Category } from "../types/youtube";
 
 export const youtubeCategories: Category[] = [
   {
+    title: "AI 영상",
+    videos: [
+      { id: "PdMOYRK12DQ", videoName: "일리윤 세라마이드" },
+      { id: "WSGmFOu7a2w", videoName: "쥬비스 다이어트" },
+      { id: "tQ7FAXgdXww", videoName: "보승회관 국밥 광고" },
+      { id: "Ln7MGG4uyds", videoName: "경기관광공사 경기도 관광지 홍보 영상" },
+    ],
+  },
+  {
     title: "스케치영상",
     videos: [
       { id: "JGT0E8qMHTg", videoName: "bgf로직스" },
