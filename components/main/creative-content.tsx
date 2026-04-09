@@ -116,7 +116,7 @@ export const Creative = () => {
       ))}
       <div className="flex flex-col items-center justify-center mt-8">
         <Image
-          src="/영상 단가표01.png"
+          src="/영상단가표01.png"
           alt="단가표01"
           className="max-w-full h-auto"
           width={1000}
