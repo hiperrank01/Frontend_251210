@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://ninewinit.store"),
   title: "나인위닛 - 네이버 구글 메타 광고 최적화 전문",
   description:
-    "네이버 구글 메타 광고 최적화 해드립니다. 매출 성장을 위한 마케팅 솔루션을 제공합니다.",
+    "네이버 구글 메타 광고 무료 최적화. 매출 성장을 위한 마케팅 솔루션을 제공합니다.",
   keywords: "스마트스토어, SEO, 네이버쇼핑, 광고최적화, 키워드분석",
   generator: "v0.dev",
 
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     url: "https://ninewinit.store",
     title: "나인위닛 - 네이버 구글 메타 광고 최적화 전문",
     description:
-      "네이버 구글 메타 광고 최적화 해드립니다. 매출 성장을 위한 마케팅 솔루션을 제공합니다.",
+      "네이버 구글 메타 광고 무료 최적화. 매출 성장을 위한 마케팅 솔루션을 제공합니다.",
     siteName: "Ninewinit",
     images: [
       {
