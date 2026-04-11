@@ -13,9 +13,9 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://ninewinit.store"),
-  title: "나인위닛 - 스마트스토어 SEO 최적화 솔루션",
+  title: "나인위닛 - 네이버 구글 메타 자동화 마케팅 솔루션",
   description:
-    "데이터 기반 스마트스토어 SEO 분석 및 광고 최적화 서비스. 매출 성장을 위한 전문 솔루션을 제공합니다.",
+    "네이버 구글 메타 광고 최적화 해드립니다. 매출 성장을 위한 마케팅 솔루션을 제공합니다.",
   keywords: "스마트스토어, SEO, 네이버쇼핑, 광고최적화, 키워드분석",
   generator: "v0.dev",
 
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     url: "https://ninewinit.store",
     title: "나인위닛 - 스마트스토어 SEO 최적화 솔루션",
     description:
-      "데이터 기반 스마트스토어 SEO 분석 및 광고 최적화 서비스. 매출 성장을 위한 전문 솔루션을 제공합니다.",
+      "네이버 구글 메타 광고 최적화 해드립니다. 매출 성장을 위한 마케팅 솔루션을 제공합니다.",
     siteName: "Ninewinit",
     images: [
       {
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "나인위닛 - 스마트스토어 SEO 최적화 솔루션",
-    description: "데이터 기반 스마트스토어 SEO 분석 및 광고 최적화 서비스.",
+    description: "네이버 구글 메타 광고 최적화 해드립니다. 매출 성장을 위한 마케팅 솔루션을 제공합니다",
     images: ["/Logo_Main.png"],
   },
 };
