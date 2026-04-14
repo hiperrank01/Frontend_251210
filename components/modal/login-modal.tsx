@@ -46,7 +46,7 @@ export function LoginModal({
     },
     () => {
       toast.error("로그인 실패: 이메일 또는 비밀번호를 확인해주세요");
-    }
+    },
   );
 
   const { mutate: loginWithGoogle, isPending: isGoogleLoginPending } =
@@ -58,13 +58,14 @@ export function LoginModal({
           accessToken: data.access,
           email: data.user.eml_adr,
           nm: data.user.nm,
+          phoneNumber: data.user.mbr_no,
         });
 
         onClose();
       },
       (err) => {
         toast.error(err.message || "구글 로그인에 실패했습니다.");
-      }
+      },
     );
 
   const handleSubmit = (e: React.FormEvent) => {

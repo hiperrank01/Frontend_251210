@@ -9,6 +9,7 @@ export interface AuthResponse {
   user: {
     eml_adr: string;
     nm: string;
+    mbr_no: string;
   };
 }
 

@@ -18,6 +18,7 @@ export function useLogin(onSuccess?: () => void, onError?: (err: any) => void) {
         accessToken: data.access,
         email: data.user.eml_adr,
         nm: data.user.nm,
+        phoneNumber: data.user.mbr_no,
       });
 
       toast.success("로그인 성공! 환영합니다");
@@ -45,7 +46,7 @@ export function useLogout() {
 }
 export function useGoogleLogin(
   onSuccessCallback?: (data: AuthResponse) => void,
-  onErrorCallback?: (error: any) => void
+  onErrorCallback?: (error: any) => void,
 ) {
   const setAuth = useAuthStore((state) => state.setAuth);
   return useMutation({
@@ -57,6 +58,7 @@ export function useGoogleLogin(
         accessToken: data.access,
         email: data.user.eml_adr,
         nm: data.user.nm,
+        phoneNumber: data.user.mbr_no,
       });
       toast.success("Google 계정으로 로그인되었습니다!");
       if (onSuccessCallback) onSuccessCallback(data);
