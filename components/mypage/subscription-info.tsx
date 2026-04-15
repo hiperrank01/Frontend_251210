@@ -27,7 +27,7 @@ import {
 import { toast } from "sonner";
 
 export default function SubscriptionInfo() {
-  const { isPro, accessToken, email, nm, phoneNumber, userId } = useAuthStore();
+  const { accessToken, email, nm, phoneNumber, userId } = useAuthStore();
   const [subscription, setSubscription] = useState<SubscriptionStatus | null>(
     null,
   );
