@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import * as PortOne from "@portone/browser-sdk/v2";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -15,6 +16,8 @@ import {
   Loader2,
 } from "lucide-react";
 import { useAuthStore } from "@/store/store";
+import { createSubscription } from "@/fetch/subscription-api";
+import { toast } from "sonner";
 
 interface Plan {
   id: string;
@@ -74,6 +77,7 @@ const features = [
 ];
 
 export default function ProSignupPage() {
+  const router = useRouter();
   const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -82,7 +86,14 @@ export default function ProSignupPage() {
     message: string;
   } | null>(null);
 
-  const { email, nm, phoneNumber } = useAuthStore();
+  const { email, nm, phoneNumber, userId, isPro } = useAuthStore();
+
+  useEffect(() => {
+    if (isPro) {
+      toast.error("이미 PRO에 가입된 사용자입니다.");
+      router.replace("/mypage");
+    }
+  }, [isPro, router]);
 
   const currentPlan = plans.find((p) => p.id === selectedPlan);
 
@@ -99,14 +110,16 @@ export default function ProSignupPage() {
     setResult(null);
 
     try {
+      const issueId = `iss${crypto.randomUUID().replace(/-/g, "").slice(0, 36)}`;
+
       const response = await PortOne.requestIssueBillingKey({
         storeId: process.env.NEXT_PUBLIC_PORTONE_STORE_ID!,
         channelKey: process.env.NEXT_PUBLIC_PORTONE_CHANNEL_KEY!,
         billingKeyMethod: "CARD",
-        issueId: `iss${crypto.randomUUID().replace(/-/g, "").slice(0, 36)}`,
+        issueId,
         issueName: `PRO 멤버십 ${currentPlan.duration} 정기결제 등록`,
         customer: {
-          customerId: `customer-${Date.now()}`,
+          customerId: userId ? String(userId) : `customer-${Date.now()}`,
           email: email || undefined,
           phoneNumber: phoneNumber || undefined,
           fullName: nm || undefined,
@@ -119,33 +132,24 @@ export default function ProSignupPage() {
           message: response.message || "빌링키 발급에 실패했습니다.",
         });
       } else if (response?.billingKey) {
-        // 빌링키 발급 성공 → 첫 결제 실행
-        const payRes = await fetch("/api/pay-with-billing-key", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            billingKey: response.billingKey,
-            orderName: `PRO 멤버십 ${currentPlan.duration} 정기결제`,
-            amount: currentPlan.totalPrice,
-            currency: "KRW",
-            customer: {
-              customerId: `customer-${Date.now()}`,
-              email: email || undefined,
-              phoneNumber: phoneNumber || undefined,
-              fullName: nm || undefined,
-            },
-          }),
+        // 빌링키 발급 성공 → Django 서버로 구독 생성 + 첫 결제
+        const data = await createSubscription({
+          billingKey: response.billingKey,
+          planId: currentPlan.id,
+          issueId,
         });
 
-        const payData = await payRes.json();
-
-        if (!payRes.ok) {
-          setResult({
-            type: "error",
-            message: payData.error || "결제에 실패했습니다.",
-          });
-          return;
-        }
+        // 스토어 PRO 상태 업데이트
+        const state = useAuthStore.getState();
+        useAuthStore.getState().setAuth({
+          accessToken: state.accessToken,
+          email: state.email,
+          nm: state.nm,
+          phoneNumber: state.phoneNumber,
+          userId: state.userId ?? undefined,
+          isPro: true,
+          proExpiresAt: data.currentPeriodEnd,
+        });
 
         setResult({
           type: "success",

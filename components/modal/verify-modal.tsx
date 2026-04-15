@@ -61,13 +61,16 @@ export function EmailVerifyModal({
           accessToken: data.access,
           email: data.user.eml_adr,
           nm: data.user.nm,
+          userId: data.user.user_id,
+          isPro: data.user.is_pro,
+          proExpiresAt: data.user.pro_expires_at,
         });
         toast.success("Google 계정으로 로그인되었습니다!");
         onClose();
       },
       (err) => {
         toast.error(err.message || "구글 로그인에 실패했습니다.");
-      }
+      },
     );
 
   const handleGoogleSuccess = (response: { credential?: string }) => {

@@ -15,6 +15,9 @@ export const useAuthStore = create<AuthState>()(
       email: "",
       nm: "",
       phoneNumber: "",
+      userId: null,
+      isPro: false,
+      proExpiresAt: null,
       isHydrated: false,
       setAuth: (authData) =>
         set({
@@ -22,11 +25,22 @@ export const useAuthStore = create<AuthState>()(
           email: authData.email,
           nm: authData.nm,
           phoneNumber: authData.phoneNumber,
+          userId: authData.userId ?? null,
+          isPro: authData.isPro ?? false,
+          proExpiresAt: authData.proExpiresAt ?? null,
         }),
       clearAuth: () => {
         localStorage.removeItem("accessToken");
         localStorage.removeItem("refreshToken");
-        set({ accessToken: "", email: "", nm: "", phoneNumber: "" });
+        set({
+          accessToken: "",
+          email: "",
+          nm: "",
+          phoneNumber: "",
+          userId: null,
+          isPro: false,
+          proExpiresAt: null,
+        });
       },
       setHydrated: (hydrated: boolean) => set({ isHydrated: hydrated }),
     }),

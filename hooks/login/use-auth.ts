@@ -19,6 +19,9 @@ export function useLogin(onSuccess?: () => void, onError?: (err: any) => void) {
         email: data.user.eml_adr,
         nm: data.user.nm,
         phoneNumber: data.user.mbr_no,
+        userId: data.user.user_id,
+        isPro: data.user.is_pro,
+        proExpiresAt: data.user.pro_expires_at,
       });
 
       toast.success("로그인 성공! 환영합니다");
@@ -59,6 +62,9 @@ export function useGoogleLogin(
         email: data.user.eml_adr,
         nm: data.user.nm,
         phoneNumber: data.user.mbr_no,
+        userId: data.user.user_id,
+        isPro: data.user.is_pro,
+        proExpiresAt: data.user.pro_expires_at,
       });
       toast.success("Google 계정으로 로그인되었습니다!");
       if (onSuccessCallback) onSuccessCallback(data);

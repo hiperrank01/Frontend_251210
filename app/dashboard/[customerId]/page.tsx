@@ -26,6 +26,10 @@ import SummeryComparisonSection from "@/components/dashboard/report-sections/Sum
 import { HistoryGridSection } from "@/components/dashboard/report-sections/HistoryGridSection";
 import { MonthlyReportSummarySection } from "@/components/dashboard/report-sections/MonthlyReportSummarySection";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
+import {
+  ProUpgradePrompt,
+  isSubscriptionError,
+} from "@/components/dashboard/report-sections/pro-upgrade-prompt";
 
 const CustomerReportPage = () => {
   const params = useParams<{ customerId: string }>();
@@ -66,7 +70,7 @@ const CustomerReportPage = () => {
     customerId,
     year || "",
     month,
-    enabledQuery
+    enabledQuery,
   );
   const {
     data: monthlyReportSummaryData,
@@ -76,7 +80,7 @@ const CustomerReportPage = () => {
     customerId,
     year || "",
     month,
-    enabledQuery
+    enabledQuery,
   );
 
   const isAnythingLoading =
@@ -151,27 +155,37 @@ const CustomerReportPage = () => {
               </div>
             )}
 
-            <SummaryGridSection
-              data={summaryGridData}
-              error={errorSummaryGrid}
-            />
-            <ComparisonGridSection
-              data={comparisonGridData}
-              error={errorComparisonGrid}
-            />
+            {isSubscriptionError(errorSummaryGrid) ||
+            isSubscriptionError(errorComparisonGrid) ||
+            isSubscriptionError(errorHistoryGrid) ||
+            isSubscriptionError(errorSummeryComparison) ||
+            isSubscriptionError(errorMonthlyReportSummary) ? (
+              <ProUpgradePrompt />
+            ) : (
+              <>
+                <SummaryGridSection
+                  data={summaryGridData}
+                  error={errorSummaryGrid}
+                />
+                <ComparisonGridSection
+                  data={comparisonGridData}
+                  error={errorComparisonGrid}
+                />
 
-            <HistoryGridSection
-              data={historyGridData}
-              error={errorHistoryGrid}
-            />
-            <SummeryComparisonSection
-              data={summeryComparisonData}
-              error={errorSummeryComparison}
-            />
-            <MonthlyReportSummarySection
-              data={monthlyReportSummaryData}
-              error={errorMonthlyReportSummary}
-            />
+                <HistoryGridSection
+                  data={historyGridData}
+                  error={errorHistoryGrid}
+                />
+                <SummeryComparisonSection
+                  data={summeryComparisonData}
+                  error={errorSummeryComparison}
+                />
+                <MonthlyReportSummarySection
+                  data={monthlyReportSummaryData}
+                  error={errorMonthlyReportSummary}
+                />
+              </>
+            )}
           </>
         )}
       </div>

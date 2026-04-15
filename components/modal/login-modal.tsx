@@ -59,6 +59,9 @@ export function LoginModal({
           email: data.user.eml_adr,
           nm: data.user.nm,
           phoneNumber: data.user.mbr_no,
+          userId: data.user.user_id,
+          isPro: data.user.is_pro,
+          proExpiresAt: data.user.pro_expires_at,
         });
 
         onClose();

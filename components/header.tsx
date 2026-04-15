@@ -27,7 +27,7 @@ export const Header = () => {
   const [showAuth, setShowAuth] = useState(false);
 
   const logout = useLogout();
-  const { accessToken, isHydrated } = useAuthStore();
+  const { accessToken, isHydrated, isPro } = useAuthStore();
   const isMobile = useIsMobile();
   const { toast } = useToast();
 
@@ -77,8 +77,19 @@ export const Header = () => {
         </a>
       )}
 
-      {isMobileView ? (
-        <SheetClose asChild>
+      {!isPro &&
+        (isMobileView ? (
+          <SheetClose asChild>
+            <button
+              onClick={() => setShowMembership(true)}
+              className={`hover:text-gray-300 transition-colors ${
+                isMobileView ? "block w-full text-left py-2" : ""
+              }`}
+            >
+              PRO가입
+            </button>
+          </SheetClose>
+        ) : (
           <button
             onClick={() => setShowMembership(true)}
             className={`hover:text-gray-300 transition-colors ${
@@ -87,17 +98,7 @@ export const Header = () => {
           >
             PRO가입
           </button>
-        </SheetClose>
-      ) : (
-        <button
-          onClick={() => setShowMembership(true)}
-          className={`hover:text-gray-300 transition-colors ${
-            isMobileView ? "block w-full text-left py-2" : ""
-          }`}
-        >
-          PRO가입
-        </button>
-      )}
+        ))}
 
       {accessToken ? (
         isMobileView ? (

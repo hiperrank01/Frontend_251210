@@ -41,14 +41,14 @@ const parseLine = (line: string): Item => {
     .trim();
 
   const nameIdMatch = normalized.match(
-    /광고그룹\s*'([^']+)'\s*\(id\s*[: ]?\s*([^\)]+)\)/i
+    /광고그룹\s*'([^']+)'\s*\(id\s*[: ]?\s*([^\)]+)\)/i,
   );
   const nameMatch = normalized.match(/광고그룹\s*'([^']+)'/i);
   const name = nameIdMatch
     ? `${nameIdMatch[1].trim()} (id:${nameIdMatch[2].trim()})`
     : nameMatch
-    ? nameMatch[1].trim()
-    : normalized.slice(0, 60);
+      ? nameMatch[1].trim()
+      : normalized.slice(0, 60);
 
   const percentMatch = normalized.match(/\(\s*([+-]?[0-9,.]+)\s*%\s*\)/);
   const percentText = percentMatch
@@ -73,8 +73,8 @@ const parseLine = (line: string): Item => {
       currAmount > prevAmount
         ? "up"
         : currAmount < prevAmount
-        ? "down"
-        : "neutral";
+          ? "down"
+          : "neutral";
   } else {
     direction = "neutral";
   }
@@ -166,8 +166,8 @@ export const MonthlyReportSummarySection = ({
     const colorClass = isPositive
       ? "text-red-500 font-bold"
       : isNegative
-      ? "text-blue-500 font-bold"
-      : "text-gray-500 font-medium";
+        ? "text-blue-500 font-bold"
+        : "text-gray-500 font-medium";
 
     return (
       <span className="flex items-center gap-1">
