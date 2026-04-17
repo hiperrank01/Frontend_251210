@@ -17,20 +17,21 @@ const NaverCallback = () => {
     (data) => {
       localStorage.setItem("accessToken", data.access);
       localStorage.setItem("refreshToken", data.refresh);
-      useAuthStore
-        .getState()
-        .setAuth({
-          accessToken: data.access,
-          email: data.user.eml_adr,
-          nm: data.user.nm,
-        });
+      useAuthStore.getState().setAuth({
+        accessToken: data.access,
+        email: data.user.eml_adr,
+        nm: data.user.nm,
+        userId: data.user.user_id,
+        isPro: data.user.is_pro,
+        proExpiresAt: data.user.pro_expires_at,
+      });
       toast.success("네이버 계정으로 로그인되었습니다!");
       router.push("/"); // 로그인 성공 후 메인 페이지로 이동
     },
     (err) => {
       toast.error(err.message || "네이버 로그인에 실패했습니다.");
       router.push("/"); // 실패 시 로그인 페이지로 이동
-    }
+    },
   );
 
   useEffect(() => {

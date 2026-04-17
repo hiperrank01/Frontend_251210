@@ -6,7 +6,7 @@ import { AuthResponse } from "@/types/auth";
 
 export const useNaverLogin = (
   onSuccessCallback?: (data: AuthResponse) => void,
-  onErrorCallback?: (error: any) => void
+  onErrorCallback?: (error: any) => void,
 ) => {
   const setAuth = useAuthStore((state) => state.setAuth);
   return useMutation({
@@ -19,6 +19,9 @@ export const useNaverLogin = (
         accessToken: data.access,
         email: data.user.eml_adr,
         nm: data.user.nm,
+        userId: data.user.user_id,
+        isPro: data.user.is_pro,
+        proExpiresAt: data.user.pro_expires_at,
       });
       toast.success("네이버 계정으로 로그인되었습니다!");
       if (onSuccessCallback) onSuccessCallback(data);

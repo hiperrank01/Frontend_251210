@@ -53,7 +53,8 @@ export const ProModal = ({
                   </p>
                   <Button
                     onClick={() => {
-                      router.push("pro-upgrade");
+                      setShowMembership(false);
+                      router.push("/pro-upgrade");
                     }}
                     className="w-full"
                   >

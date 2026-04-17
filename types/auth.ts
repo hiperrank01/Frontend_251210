@@ -7,8 +7,12 @@ export interface AuthResponse {
   access: string;
   refresh: string;
   user: {
+    user_id: number;
     eml_adr: string;
     nm: string;
+    mbr_no: string;
+    is_pro: boolean;
+    pro_expires_at: string | null;
   };
 }
 

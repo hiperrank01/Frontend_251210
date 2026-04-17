@@ -46,14 +46,14 @@ const parseLine = (line: string): Item => {
   const cleaned = normalized.replace(/-\s*전월:\s*₩[0-9,]*/g, "").trim();
 
   const nameIdMatch = cleaned.match(
-    /캠페인\s*'([^']+)'\s*\(id\s*[: ]?\s*([^\)]+)\)/i
+    /캠페인\s*'([^']+)'\s*\(id\s*[: ]?\s*([^\)]+)\)/i,
   );
   const nameMatch = cleaned.match(/캠페인\s*'([^']+)'/i);
   const name = nameIdMatch
     ? `${nameIdMatch[1].trim()} (id:${nameIdMatch[2].trim()})`
     : nameMatch
-    ? nameMatch[1].trim()
-    : cleaned.slice(0, 60);
+      ? nameMatch[1].trim()
+      : cleaned.slice(0, 60);
 
   const percentMatch = cleaned.match(/\(\s*([+-]?[0-9,.]+)\s*%\s*\)/);
   const percentText = percentMatch
@@ -77,8 +77,8 @@ const parseLine = (line: string): Item => {
       currAmount > prevAmount
         ? "up"
         : currAmount < prevAmount
-        ? "down"
-        : "neutral";
+          ? "down"
+          : "neutral";
   }
 
   return {
@@ -167,8 +167,8 @@ const SummaryComparisonSection = ({
     const colorClass = isPositive
       ? "text-red-500 font-bold"
       : isNegative
-      ? "text-blue-500 font-bold"
-      : "text-gray-500 font-medium";
+        ? "text-blue-500 font-bold"
+        : "text-gray-500 font-medium";
 
     return (
       <span className="flex items-center gap-1">

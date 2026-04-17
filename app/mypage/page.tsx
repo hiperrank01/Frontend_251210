@@ -1,5 +1,6 @@
 import UserProfile from "@/components/mypage/user-profile";
 import MypageMenu from "@/components/mypage/mypage-menu";
+import SubscriptionInfo from "@/components/mypage/subscription-info";
 
 export default function Mypage() {
   return (
@@ -9,8 +10,9 @@ export default function Mypage() {
           <div className="md:col-span-1">
             <MypageMenu />
           </div>
-          <div className="md:col-span-3">
+          <div className="md:col-span-3 space-y-6">
             <UserProfile />
+            <SubscriptionInfo />
           </div>
         </div>
       </div>
