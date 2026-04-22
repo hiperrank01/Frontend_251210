@@ -27,7 +27,7 @@ export const TabNav = ({ onTabChange }: TabNavProps) => {
 
   return (
     <TooltipProvider delayDuration={0}>
-      <TabsList className="flex lg:grid w-full grid-cols-4 lg:grid-cols-7 mb-8 ">
+      <TabsList className="flex lg:grid w-full grid-cols-4 lg:grid-cols-8 mb-8 ">
         {services.map((service) => (
           <Tooltip key={service.id}>
             <TooltipTrigger asChild>
