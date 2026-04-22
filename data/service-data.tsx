@@ -107,9 +107,10 @@ export const services: SERVICE_TYPE = [
   },
   {
     id: "imc-report",
-    title: "IMC 제안서",
+    title: "IMC 통합 마케팅 제안서",
     icon: <FileChartColumn className="w-6 h-6" />,
-    description: "통합 마케팅 전략 수립 및 실행 계획 제안",
+    description:
+      "웹사이트 URL 입력시 페이지 분석을 통한 IMC 통합 마케팅 제안서 작성",
     text: [],
   },
   {
