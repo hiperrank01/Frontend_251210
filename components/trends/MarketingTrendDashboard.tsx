@@ -3,13 +3,12 @@
 import { useCallback, useMemo } from "react";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { Calendar, ChevronRight, Loader2 } from "lucide-react";
+import { ChevronRight, Loader2 } from "lucide-react";
 
 import { ContentList } from "@/components/trends/sections/ContentList";
 import { DateNavigator } from "@/components/trends/sections/DateNavigator";
 import { TrendList } from "@/components/trends/sections/TrendList";
 import { VideoList } from "@/components/trends/sections/VideoList";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useDashboard } from "@/hooks/trends/use-dashboard";
 import { todayISO } from "@/lib/utils";
