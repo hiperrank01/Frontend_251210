@@ -91,6 +91,14 @@ export const services: SERVICE_TYPE = [
     ],
   },
   {
+    id: "marketing-trend",
+    title: "마케팅 트렌드 대시보드",
+    icon: <FileChartColumn className="w-6 h-6" />,
+    description:
+      "네이버 검색 트렌드, 유튜브 마케팅 영상, 일반 뉴스 등 마케팅 트렌드 대시보드 제공",
+    text: [],
+  },
+  {
     id: "competitor",
     title: "자사 경쟁사 분석",
     icon: <TrendingUp className="w-6 h-6" />,
