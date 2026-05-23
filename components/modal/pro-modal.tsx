@@ -7,6 +7,8 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { MEMBERSHIP_PLANS } from "@/config/pricing";
+
 export const ProModal = ({
   showMembership,
   setShowMembership,
@@ -14,12 +16,6 @@ export const ProModal = ({
   showMembership: boolean;
   setShowMembership: (show: boolean) => void;
 }) => {
-  const membershipPlans = [
-    { period: "1개월", price: 7900, popular: false },
-    { period: "3개월", price: 19800, popular: true },
-    { period: "1년", price: 80000, popular: false },
-  ];
-
   if (!showMembership) return null;
 
   return (
@@ -33,7 +29,7 @@ export const ProModal = ({
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-            {membershipPlans.map((plan) => (
+            {MEMBERSHIP_PLANS.map((plan) => (
               <Card
                 key={plan.period}
                 className={`relative ${
