@@ -5,11 +5,15 @@ import { ProModal } from "@/components/modal/pro-modal";
 import { AuthModal } from "@/components/modal/auth-modal";
 import { useRouter, useSearchParams } from "next/navigation";
 import mainLogo from "@/public/Logo_Main.png";
+import { useAuthStore } from "@/stores/auth-store";
+import { useLogoutMutation } from "@/hooks/use-auth";
 export const Header = () => {
   const [showMembership, setShowMembership] = useState(false);
   const [showAuth, setShowAuth] = useState(false);
   const router = useRouter();
   const searchParams = useSearchParams();
+  const isAuthenticated = useAuthStore((state) => Boolean(state.accessToken));
+  const logout = useLogoutMutation();
   return (
     <header className="sticky top-0 z-50 bg-black text-white py-4 px-6">
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row justify-between items-center space-y-4 lg:space-y-0">
@@ -37,12 +41,26 @@ export const Header = () => {
           >
             PRO가입
           </button>
-          <button
-            onClick={() => setShowAuth(true)}
-            className="hover:text-gray-300 transition-colors"
-          >
-            로그인
-          </button>
+          {isAuthenticated ? (
+            <button
+              onClick={() =>
+                logout.mutate(undefined, {
+                  onSettled: () => router.replace("/"),
+                })
+              }
+              className="hover:text-gray-300 transition-colors"
+              disabled={logout.isPending}
+            >
+              {logout.isPending ? "로그아웃 중..." : "로그아웃"}
+            </button>
+          ) : (
+            <button
+              onClick={() => setShowAuth(true)}
+              className="hover:text-gray-300 transition-colors"
+            >
+              로그인
+            </button>
+          )}
           <button
             onClick={() => {
               router.push("mypage", { scroll: false });
