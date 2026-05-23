@@ -44,20 +44,20 @@ export default function HeroSection() {
           <div className="space-y-3 mb-10">
             <div className="group">
               <blockquote className=" hover:-rotate-1 transition-transform duration-300 text-base md:text-base text-black font-medium bg-gray-50 px-4 py-2 rounded-lg shadow-sm hover:shadow-md hover:bg-gray-100 transition-all duration-300 italic">
-                "광고 매출/효율 Maximum으로 올리는 방법은?"
+                &ldquo;광고 매출/효율 Maximum으로 올리는 방법은?&rdquo;
               </blockquote>
             </div>
 
             <div className="group">
               <blockquote className="hover:-rotate-1 transition-transform duration-300 text-base md:text-base text-black font-medium bg-gray-50 px-4 py-3 rounded-lg shadow-sm hover:shadow-md hover:bg-gray-100 transition-all duration-300 italic">
-                "상품 5개만 넘어가도 무엇을 어떻게 집중해야할지 모르는 대행사들,
-                어떻게 관리해야할까?"
+                &ldquo;상품 5개만 넘어가도 무엇을 어떻게 집중해야할지 모르는 대행사들,
+                어떻게 관리해야할까?&rdquo;
               </blockquote>
             </div>
 
             <div className="group">
               <blockquote className="hover:-rotate-1 transition-transform duration-300 text-base md:text-base text-black font-medium bg-gray-50 px-4 py-3 rounded-lg shadow-sm hover:shadow-md hover:bg-gray-100 transition-all duration-300 italic">
-                "네이버/구글/메타 등 매체별 놓치고 있는 키워드는 없나?"
+                &ldquo;네이버/구글/메타 등 매체별 놓치고 있는 키워드는 없나?&rdquo;
               </blockquote>
             </div>
           </div>

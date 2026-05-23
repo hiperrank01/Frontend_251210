@@ -11,12 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Search, Star, Download } from "lucide-react";
 import { services } from "@/data/service-data";
-import {
-  Tooltip,
-  TooltipTrigger,
-  TooltipContent,
-  TooltipProvider,
-} from "@/components/ui/tooltip";
+
 interface ServiceSectionProps {
   setShowMembership: (show: boolean) => void;
 }
