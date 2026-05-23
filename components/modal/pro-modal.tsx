@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Card,
   CardContent,
@@ -8,15 +10,13 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { MEMBERSHIP_PLANS } from "@/config/pricing";
+import { useUIStore } from "@/stores/ui-store";
 
-export const ProModal = ({
-  showMembership,
-  setShowMembership,
-}: {
-  showMembership: boolean;
-  setShowMembership: (show: boolean) => void;
-}) => {
-  if (!showMembership) return null;
+export const ProModal = () => {
+  const isOpen = useUIStore((state) => state.isMembershipOpen);
+  const close = useUIStore((state) => state.closeMembership);
+
+  if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
@@ -52,7 +52,7 @@ export const ProModal = ({
             ))}
           </div>
           <div className="flex justify-end space-x-2">
-            <Button variant="outline" onClick={() => setShowMembership(false)}>
+            <Button variant="outline" onClick={close}>
               취소
             </Button>
           </div>

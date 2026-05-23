@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -23,7 +22,6 @@ const INQUIRY_DEFAULTS: InquiryFormValues = {
 };
 
 export const Main = () => {
-  const [showMembership, setShowMembership] = useState(false);
   const searchParams = useSearchParams();
   const activeTab = searchParams.get("tab") || "seo-analysis";
 
@@ -43,13 +41,10 @@ export const Main = () => {
       <Tabs value={activeTab} className="w-full">
         <HeroSection />
         <TabNav />
-        <ServiceSection setShowMembership={setShowMembership} />
+        <ServiceSection />
         <InquirySection form={inquiryForm} onSubmit={onInquirySubmit} />
       </Tabs>
-      <ProModal
-        showMembership={showMembership}
-        setShowMembership={setShowMembership}
-      />
+      <ProModal />
     </main>
   );
 };
