@@ -1,8 +1,14 @@
+import type { Metadata } from "next";
 import UserProfile from "@/components/mypage/user-profile";
 import MypageMenu from "@/components/mypage/mypage-menu";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { RouteGuard } from "@/components/auth/route-guard";
+
+export const metadata: Metadata = {
+  title: "마이페이지 | 나인위닛",
+  robots: { index: false, follow: false },
+};
 
 export default function Mypage() {
   return (

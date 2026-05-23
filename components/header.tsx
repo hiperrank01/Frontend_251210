@@ -19,6 +19,8 @@ export const Header = () => {
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row justify-between items-center space-y-4 lg:space-y-0">
         <div className="flex items-center space-x-2">
           <button
+            type="button"
+            aria-label="홈으로 이동"
             onClick={() => {
               router.push("/");
             }}

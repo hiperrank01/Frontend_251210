@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useSearchParams } from "next/navigation";
+import { toast } from "sonner";
 import { Tabs } from "@/components/ui/tabs";
 import { ProModal } from "@/components/modal/pro-modal";
 import { TabNav } from "@/components/tab/tab-nav";
@@ -21,9 +22,7 @@ export const Main = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // 구글 시트 연동 로직 (실제 구현 시 Google Apps Script 사용)
-    console.log("Form submitted:", formData);
-    alert("문의가 접수되었습니다. 빠른 시일 내에 연락드리겠습니다.");
+    toast.success("문의가 접수되었습니다. 빠른 시일 내에 연락드리겠습니다.");
     setFormData({ company: "", name: "", phone: "", email: "", inquiry: "" });
   };
 

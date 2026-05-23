@@ -46,10 +46,11 @@ export const InquirySection = ({
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium mb-2">
+                <label htmlFor="inquiry-company" className="block text-sm font-medium mb-2">
                   업체명
                 </label>
                 <Input
+                  id="inquiry-company"
                   name="company"
                   value={formData.company}
                   onChange={handleInputChange}
@@ -58,10 +59,11 @@ export const InquirySection = ({
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium mb-2">
+                <label htmlFor="inquiry-name" className="block text-sm font-medium mb-2">
                   담당자명
                 </label>
                 <Input
+                  id="inquiry-name"
                   name="name"
                   value={formData.name}
                   onChange={handleInputChange}
@@ -72,10 +74,11 @@ export const InquirySection = ({
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium mb-2">
+                <label htmlFor="inquiry-phone" className="block text-sm font-medium mb-2">
                   전화번호
                 </label>
                 <Input
+                  id="inquiry-phone"
                   name="phone"
                   value={formData.phone}
                   onChange={handleInputChange}
@@ -84,10 +87,11 @@ export const InquirySection = ({
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium mb-2">
+                <label htmlFor="inquiry-email" className="block text-sm font-medium mb-2">
                   이메일
                 </label>
                 <Input
+                  id="inquiry-email"
                   name="email"
                   type="email"
                   value={formData.email}
@@ -98,10 +102,11 @@ export const InquirySection = ({
               </div>
             </div>
             <div>
-              <label className="block text-sm font-medium mb-2">
+              <label htmlFor="inquiry-content" className="block text-sm font-medium mb-2">
                 문의내용
               </label>
               <Textarea
+                id="inquiry-content"
                 name="inquiry"
                 value={formData.inquiry}
                 onChange={handleInputChange}
