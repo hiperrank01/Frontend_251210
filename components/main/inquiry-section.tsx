@@ -1,3 +1,4 @@
+import type { UseFormReturn } from "react-hook-form";
 import {
   Card,
   CardContent,
@@ -10,26 +11,41 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { MessageSquare, Play } from "lucide-react";
+import type { InquiryFormValues } from "@/schemas/inquiry-schema";
 
-interface InquirySectionProps {
-  formData: {
-    company: string;
-    name: string;
-    phone: string;
-    email: string;
-    inquiry: string;
-  };
-  handleInputChange: (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => void;
-  handleSubmit: (e: React.FormEvent) => void;
-}
+type InquirySectionProps = {
+  form: UseFormReturn<InquiryFormValues>;
+  onSubmit: (values: InquiryFormValues) => void;
+};
 
-export const InquirySection = ({
-  formData,
-  handleInputChange,
-  handleSubmit,
-}: InquirySectionProps) => {
+type FieldName = keyof InquiryFormValues;
+
+type FieldConfig = {
+  name: FieldName;
+  id: string;
+  label: string;
+  placeholder: string;
+  type?: string;
+};
+
+const TEXT_FIELDS: ReadonlyArray<readonly FieldConfig[]> = [
+  [
+    { name: "company", id: "inquiry-company", label: "업체명", placeholder: "업체명을 입력하세요" },
+    { name: "name", id: "inquiry-name", label: "담당자명", placeholder: "담당자명을 입력하세요" },
+  ],
+  [
+    { name: "phone", id: "inquiry-phone", label: "전화번호", placeholder: "010-0000-0000" },
+    { name: "email", id: "inquiry-email", label: "이메일", placeholder: "example@email.com", type: "email" },
+  ],
+];
+
+export const InquirySection = ({ form, onSubmit }: InquirySectionProps) => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = form;
+
   return (
     <TabsContent value="inquiry">
       <Card>
@@ -43,76 +59,56 @@ export const InquirySection = ({
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-medium mb-2">
-                  업체명
-                </label>
-                <Input
-                  name="company"
-                  value={formData.company}
-                  onChange={handleInputChange}
-                  placeholder="업체명을 입력하세요"
-                  required
-                />
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4" noValidate>
+            {TEXT_FIELDS.map((row, idx) => (
+              <div key={idx} className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {row.map((field) => (
+                  <div key={field.id}>
+                    <label
+                      htmlFor={field.id}
+                      className="block text-sm font-medium mb-2"
+                    >
+                      {field.label}
+                    </label>
+                    <Input
+                      id={field.id}
+                      type={field.type ?? "text"}
+                      placeholder={field.placeholder}
+                      aria-invalid={Boolean(errors[field.name])}
+                      {...register(field.name)}
+                    />
+                    {errors[field.name] && (
+                      <p className="mt-1 text-sm text-red-500">
+                        {errors[field.name]?.message}
+                      </p>
+                    )}
+                  </div>
+                ))}
               </div>
-              <div>
-                <label className="block text-sm font-medium mb-2">
-                  담당자명
-                </label>
-                <Input
-                  name="name"
-                  value={formData.name}
-                  onChange={handleInputChange}
-                  placeholder="담당자명을 입력하세요"
-                  required
-                />
-              </div>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-medium mb-2">
-                  전화번호
-                </label>
-                <Input
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleInputChange}
-                  placeholder="010-0000-0000"
-                  required
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-2">
-                  이메일
-                </label>
-                <Input
-                  name="email"
-                  type="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  placeholder="example@email.com"
-                  required
-                />
-              </div>
-            </div>
+            ))}
             <div>
-              <label className="block text-sm font-medium mb-2">
+              <label
+                htmlFor="inquiry-content"
+                className="block text-sm font-medium mb-2"
+              >
                 문의내용
               </label>
               <Textarea
-                name="inquiry"
-                value={formData.inquiry}
-                onChange={handleInputChange}
+                id="inquiry-content"
                 placeholder="문의하실 내용을 자세히 입력해주세요"
                 rows={5}
-                required
+                aria-invalid={Boolean(errors.inquiry)}
+                {...register("inquiry")}
               />
+              {errors.inquiry && (
+                <p className="mt-1 text-sm text-red-500">
+                  {errors.inquiry.message}
+                </p>
+              )}
             </div>
-            <Button type="submit" className="w-full">
+            <Button type="submit" className="w-full" disabled={isSubmitting}>
               <Play className="w-4 h-4 mr-2" />
-              문의하기
+              {isSubmitting ? "전송 중..." : "문의하기"}
             </Button>
           </form>
         </CardContent>

@@ -3,13 +3,11 @@
 import { useState } from "react";
 import { LoginModal } from "./login-modal";
 import { SignUpModal } from "./signup-modal";
+import { useUIStore } from "@/stores/ui-store";
 
-interface AuthModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-}
-
-export function AuthModal({ isOpen, onClose }: AuthModalProps) {
+export function AuthModal() {
+  const isOpen = useUIStore((state) => state.isAuthOpen);
+  const close = useUIStore((state) => state.closeAuth);
   const [isLogin, setIsLogin] = useState(true);
 
   const toggleModal = () => {
@@ -19,26 +17,20 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
   if (!isOpen) return null;
 
   return (
-    <>
-      <div
-        className={`transition-opacity duration-300 ${
-          isOpen ? "opacity-100" : "opacity-0"
-        }`}
-      >
-        {isLogin ? (
-          <LoginModal
-            isOpen={isOpen}
-            onClose={onClose}
-            onSignUpClick={toggleModal}
-          />
-        ) : (
-          <SignUpModal
-            isOpen={isOpen}
-            onClose={onClose}
-            onLoginClick={toggleModal}
-          />
-        )}
-      </div>
-    </>
+    <div className="transition-opacity duration-300 opacity-100">
+      {isLogin ? (
+        <LoginModal
+          isOpen={isOpen}
+          onClose={close}
+          onSignUpClick={toggleModal}
+        />
+      ) : (
+        <SignUpModal
+          isOpen={isOpen}
+          onClose={close}
+          onLoginClick={toggleModal}
+        />
+      )}
+    </div>
   );
 }

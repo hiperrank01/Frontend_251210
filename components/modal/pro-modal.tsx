@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Card,
   CardContent,
@@ -7,20 +9,14 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-export const ProModal = ({
-  showMembership,
-  setShowMembership,
-}: {
-  showMembership: boolean;
-  setShowMembership: (show: boolean) => void;
-}) => {
-  const membershipPlans = [
-    { period: "1개월", price: 7900, popular: false },
-    { period: "3개월", price: 19800, popular: true },
-    { period: "1년", price: 80000, popular: false },
-  ];
+import { MEMBERSHIP_PLANS } from "@/config/pricing";
+import { useUIStore } from "@/stores/ui-store";
 
-  if (!showMembership) return null;
+export const ProModal = () => {
+  const isOpen = useUIStore((state) => state.isMembershipOpen);
+  const close = useUIStore((state) => state.closeMembership);
+
+  if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
@@ -33,7 +29,7 @@ export const ProModal = ({
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-            {membershipPlans.map((plan) => (
+            {MEMBERSHIP_PLANS.map((plan) => (
               <Card
                 key={plan.period}
                 className={`relative ${
@@ -56,7 +52,7 @@ export const ProModal = ({
             ))}
           </div>
           <div className="flex justify-end space-x-2">
-            <Button variant="outline" onClick={() => setShowMembership(false)}>
+            <Button variant="outline" onClick={close}>
               취소
             </Button>
           </div>
