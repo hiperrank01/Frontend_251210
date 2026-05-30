@@ -12,6 +12,8 @@ import { SeoAnalysis } from "./seo-analysis";
 import { services } from "@/data/service-data";
 import { Creative } from "./creative-content";
 import { BlogAutomation } from "./blog-automation-content";
+import { IMCReport } from "./imc-report";
+import { Dashboard as MarketingTrendDashboard } from "@/components/trends/MarketingTrendDashboard";
 
 interface ServiceSectionProps {
   setShowMembership: (show: boolean) => void;
@@ -63,7 +65,8 @@ export const ServiceSection = ({ setShowMembership }: ServiceSectionProps) => {
                   )}
                   {service.id === "creative" && <Creative />}
                   {service.id === "blog-automation" && <BlogAutomation />}
-
+                  {service.id === "imc-report" && <IMCReport />}
+                  {service.id === "marketing-trend" && <MarketingTrendDashboard />}
                   <br />
 
                   <Button onClick={() => setShowMembership(true)}>

@@ -1,6 +1,13 @@
-import { Search, TrendingUp, BarChart3, Users, ImageIcon, Pencil } from "lucide-react";
+import {
+  Search,
+  TrendingUp,
+  BarChart3,
+  Users,
+  ImageIcon,
+  Pencil,
+  FileChartColumn,
+} from "lucide-react";
 import { SERVICE_TYPE } from "@/types/service-data";
-
 
 export const services: SERVICE_TYPE = [
   {
@@ -26,7 +33,7 @@ export const services: SERVICE_TYPE = [
       { content: "03. 상품(소재)별 리포트" },
       { content: <img src="/report/naver_report_03.png" /> },
       { content: "04. 키워드별 리포트" },
-      { content: <img src="/report/naver_report_04.png" /> }
+      { content: <img src="/report/naver_report_04.png" /> },
     ],
   },
   {
@@ -34,28 +41,37 @@ export const services: SERVICE_TYPE = [
     title: "GA 활용 고객 행동 분석",
     icon: <Users className="w-6 h-6" />,
     description: "루커스튜디오 연동 CRM, 코호트, AARRR 퍼널 분석",
-    description2: "자사몰 매체별 유입 현황 트래킹 및 리타게팅 광고 운영, 매체별 A/B 테스트 자동 보고서 제공",
+    description2:
+      "자사몰 매체별 유입 현황 트래킹 및 리타게팅 광고 운영, 매체별 A/B 테스트 자동 보고서 제공",
     text: [
       { content: "GA4 사용해야 하는 이유 및 예시" },
       { content: "01. 유입채널분석" },
       { content: <img src="/ga/ga활용1.png" /> },
       { content: "02. 퍼널별 이탈/전환율 분석" },
       { content: <img src="/ga/ga활용2.png" /> },
-      { content: "03. 캠페인 목적별 유입 분석 - 인지도, 트래픽, 구독자 증가 등" },
+      {
+        content: "03. 캠페인 목적별 유입 분석 - 인지도, 트래픽, 구독자 증가 등",
+      },
       { content: <img src="/ga/ga활용3.png" /> },
       { content: "04. 고객 행동 흐름 분석, 세그먼트 분석" },
       { content: <img src="/ga/ga활용4.png" /> },
       { content: "05. 소재별 AB테스트 보고서 제공" },
       { content: <img src="/ga/AB_TEST_REPORT.png" /> },
-      { content: "CRM 마케팅 ➡️ 내부데이터 활용한 코호트, RFM, AARRR 퍼널 분석" },
-      { content: "GA4 연동시 utm, gtm 설치 등 전담 개발자가 필요합니다. 별도 문의 주시기 바랍니다." },
+      {
+        content: "CRM 마케팅 ➡️ 내부데이터 활용한 코호트, RFM, AARRR 퍼널 분석",
+      },
+      {
+        content:
+          "GA4 연동시 utm, gtm 설치 등 전담 개발자가 필요합니다. 별도 문의 주시기 바랍니다.",
+      },
     ],
   },
   {
     id: "seo-analysis",
     title: "랭킹/예상 매출 분석",
     icon: <Search className="w-6 h-6" />,
-    description: "스마트스토어 URL 분석으로 자사/경쟁사 상품명, 순위, 예상매출 정보 제공",
+    description:
+      "스마트스토어 URL 분석으로 자사/경쟁사 상품명, 순위, 예상매출 정보 제공",
     text: [
       {
         content: `품질지수의 중요함 아시나요?
@@ -75,17 +91,35 @@ export const services: SERVICE_TYPE = [
     ],
   },
   {
+    id: "marketing-trend",
+    title: "마케팅 트렌드 대시보드",
+    icon: <FileChartColumn className="w-6 h-6" />,
+    description:
+      "네이버 검색 트렌드, 유튜브 마케팅 영상, 일반 뉴스 등 마케팅 트렌드 대시보드 제공",
+    text: [],
+  },
+  {
     id: "competitor",
     title: "자사 경쟁사 분석",
     icon: <TrendingUp className="w-6 h-6" />,
     description: "경쟁사 대비 우위 요소 분석 및 상품 개선 방안 도출",
     text: [
       { content: "자사 프로그램 활용한 키워드별 상품 정보 제공" },
-      { content: "PRO 결제시 경쟁사 대비 우위 요소 분석 및 상품 개선 방안 제공" },
+      {
+        content: "PRO 결제시 경쟁사 대비 우위 요소 분석 및 상품 개선 방안 제공",
+      },
       { content: "➡️ 순위, 상품명, 판매가, 스토어명, 구매수, 리뷰평점 제공" },
       { content: <img src="/competitor_00.png" /> },
       { content: <img src="/competitor_03.png" /> },
     ],
+  },
+  {
+    id: "imc-report",
+    title: "IMC 통합 마케팅 제안서",
+    icon: <FileChartColumn className="w-6 h-6" />,
+    description:
+      "웹사이트 URL 입력시 페이지 분석을 통한 IMC 통합 마케팅 제안서 작성",
+    text: [],
   },
   {
     id: "creative",
@@ -102,4 +136,3 @@ export const services: SERVICE_TYPE = [
     text: [],
   },
 ];
-
