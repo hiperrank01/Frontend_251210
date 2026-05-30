@@ -23,10 +23,10 @@ export const Footer = () => {
           </div>
           <div className="space-y-2 text-sm text-gray-400">
             <p>주소: 경기도 부천시 원미구 부일로 232 부천시사회적경제센터 403호</p>
-            <p>전화: 010-4590-4917</p>
+            <p>전화: 010-2460-4917</p>
             <p>이메일:9winit01@gmail.com</p>
             <p>사업자번호: 246-17-02470</p>
-            <p>대표: 배대근</p>
+            <p>대표: 배성한</p>
           </div>
         </div>
         <div className="border-t border-gray-800 mt-8 pt-8 flex flex-col items-center text-gray-400">
